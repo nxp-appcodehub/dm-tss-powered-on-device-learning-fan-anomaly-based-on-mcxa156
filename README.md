@@ -53,58 +53,73 @@ Model inference during is 15ms
 ### 3.1 Step 1
 
 - Connect board with LCD
+- 
   ![](image/lcd_connect.jpg)
+
 - Mounting ACCEL-4-CLICK to the FAN
+- 
   ![](image/fan.jpg)
+
 - Connect board with ACCEL-4-CLICK
+- 
   ![](image/sensor_connect.jpg)
+
 - Connect debug port
+- 
   ![](image/debug.jpg)
+
 - whole system
+- 
   ![](image/system.jpg)
+
 
 ### 3.2 Step 2
 
 Import "dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" from Application Code Hub
 
 - Import project in MCUXpresso IDE
+- 
   ![](image/mcux%20_import_project.png)
+
 - Import project in VS code
+- 
   ![](image/vs_import_project.png)
+
 - Build project and download to the board  
 
 ## 4. Results<a name="step4"></a>
 - Turn on the Fan, then normal state is detected,Switch the speed of Fan, the state of Fan remain normal
+- 
   ![](image/normal.jpg)
+
 - Knock on the Fan than anomaly is detected
+- 
   ![](image/anormaly1.jpg)
+
 - Disrupting the operation of the Fan blades, anomaly is detected
+- 
   ![](image/anomaly2.jpg)
+
 - Rotate it 90 degrees counterclockwise, anomaly is detected
+- 
   ![](image/anormaly3.jpg)
+
 
  ### Training on Device
  - Enter Trainer window, click start button ensure that don’t move the Fan during the training procedure
+ - 
    ![](image/trainer.jpg)
+
  - Return to main after training is complete
+ - 
    ![](image/trained_result.jpg)
 
  - If the model fails to accurately recognize other speeds, then conduct the training once more.
  
- 
- 
-
- 
-
-  
 
 ## 5. FAQs<a name="step5"></a>
 
-
-
 ## 6. Support<a name="step6"></a>
-
-
 
 #### Project Metadata
 
