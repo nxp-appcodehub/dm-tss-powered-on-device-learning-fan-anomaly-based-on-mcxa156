@@ -13,3 +13,4 @@ keil/*.uvguix*
 keil/*.uvoptx
 *.xls
 *.html
+.settings/

@@ -19,7 +19,7 @@
 					<folderInfo id="com.crt.advproject.config.exe.debug.1885283909." name="/" resourcePath="">
 						<toolChain id="com.crt.advproject.toolchain.exe.debug.888344566" name="NXP MCU Tools" superClass="com.crt.advproject.toolchain.exe.debug">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.GNU_ELF" id="com.crt.advproject.platform.exe.debug.285046650" name="ARM-based MCU (Debug)" superClass="com.crt.advproject.platform.exe.debug"/>
-							<builder buildPath="${workspace_loc:/frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss}/Debug" id="com.crt.advproject.builder.exe.debug.1183265684" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.crt.advproject.builder.exe.debug"/>
+							<builder buildPath="${workspace_loc:/dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156}/Debug" id="com.crt.advproject.builder.exe.debug.1183265684" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.crt.advproject.builder.exe.debug"/>
 							<tool id="com.crt.advproject.cpp.exe.debug.1501972617" name="MCU C++ Compiler" superClass="com.crt.advproject.cpp.exe.debug">
 								<option id="com.crt.advproject.cpp.hdrlib.1388133741" name="Library headers" superClass="com.crt.advproject.cpp.hdrlib" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.cpp.fpu.538814620" name="Floating point" superClass="com.crt.advproject.cpp.fpu" useByScannerDiscovery="true" value="com.crt.advproject.cpp.fpu.fpv5sp.hard" valueType="enumerated"/>
@@ -302,7 +302,7 @@
 								<option id="com.crt.advproject.link.cpp.lto.optmization.level.85254067" name="Link-time optimization level" superClass="com.crt.advproject.link.cpp.lto.optmization.level"/>
 								<option id="com.crt.advproject.link.cpp.fpu.1999166540" name="Floating point" superClass="com.crt.advproject.link.cpp.fpu" value="com.crt.advproject.link.cpp.fpu.fpv5sp.hard" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.cpp.manage.880142381" name="Manage linker script" superClass="com.crt.advproject.link.cpp.manage" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.cpp.script.1263382834" name="Linker script" superClass="com.crt.advproject.link.cpp.script" value="frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss_Debug.ld" valueType="string"/>
+								<option id="com.crt.advproject.link.cpp.script.1263382834" name="Linker script" superClass="com.crt.advproject.link.cpp.script" value="tss_powered_on_device_learning_fan_anomaly_based_on_frdmmcxa156_Debug.ld" valueType="string"/>
 								<option id="com.crt.advproject.link.cpp.scriptdir.643773963" name="Script path" superClass="com.crt.advproject.link.cpp.scriptdir" value="" valueType="string"/>
 								<option id="com.crt.advproject.link.cpp.crpenable.128885364" name="Enable automatic placement of Code Read Protection field in image" superClass="com.crt.advproject.link.cpp.crpenable"/>
 								<option id="com.crt.advproject.link.cpp.flashconfigenable.761113527" name="Enable automatic placement of Flash Configuration field in image" superClass="com.crt.advproject.link.cpp.flashconfigenable" value="true" valueType="boolean"/>
@@ -430,7 +430,7 @@
 					<folderInfo id="com.crt.advproject.config.exe.release.189058139." name="/" resourcePath="">
 						<toolChain id="com.crt.advproject.toolchain.exe.release.1222766897" name="NXP MCU Tools" superClass="com.crt.advproject.toolchain.exe.release">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.GNU_ELF" id="com.crt.advproject.platform.exe.release.1255974611" name="ARM-based MCU (Release)" superClass="com.crt.advproject.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss}/Release" id="com.crt.advproject.builder.exe.release.436199030" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.crt.advproject.builder.exe.release"/>
+							<builder buildPath="${workspace_loc:/dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156}/Release" id="com.crt.advproject.builder.exe.release.436199030" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.crt.advproject.builder.exe.release"/>
 							<tool id="com.crt.advproject.cpp.exe.release.1414977860" name="MCU C++ Compiler" superClass="com.crt.advproject.cpp.exe.release">
 								<option id="com.crt.advproject.cpp.thumb.1862571983" name="Thumb mode" superClass="com.crt.advproject.cpp.thumb" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.cpp.specs.633830105" name="Specs" superClass="com.crt.advproject.cpp.specs" useByScannerDiscovery="false" value="com.crt.advproject.cpp.specs.newlibnano" valueType="enumerated"/>
@@ -536,6 +536,7 @@
 								<option id="com.crt.advproject.cpp.stackusage.1023049299" name="Generate Stack Usage Info (-fstack-usage)" superClass="com.crt.advproject.cpp.stackusage" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.cpp.config.487468834" name="Obsolete (Config)" superClass="com.crt.advproject.cpp.config" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.cpp.store.1767511436" name="Obsolete (Store)" superClass="com.crt.advproject.cpp.store" useByScannerDiscovery="false"/>
+								<option id="com.crt.advproject.cpp.exe.release.option.optimization.level.430348357" superClass="com.crt.advproject.cpp.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
 								<inputType id="com.crt.advproject.compiler.cpp.input.1918532152" superClass="com.crt.advproject.compiler.cpp.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gcc.exe.release.1970325050" name="MCU C Compiler" superClass="com.crt.advproject.gcc.exe.release">
@@ -643,6 +644,7 @@
 								<option id="com.crt.advproject.gcc.stackusage.661466025" name="Generate Stack Usage Info (-fstack-usage)" superClass="com.crt.advproject.gcc.stackusage" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.gcc.config.599741572" name="Obsolete (Config)" superClass="com.crt.advproject.gcc.config" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.gcc.store.1216574638" name="Obsolete (Store)" superClass="com.crt.advproject.gcc.store" useByScannerDiscovery="false"/>
+								<option id="com.crt.advproject.gcc.exe.release.option.optimization.level.579665624" superClass="com.crt.advproject.gcc.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
 								<inputType id="com.crt.advproject.compiler.input.1279721474" superClass="com.crt.advproject.compiler.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gas.exe.release.2048869863" name="MCU Assembler" superClass="com.crt.advproject.gas.exe.release">
@@ -706,7 +708,7 @@
 								<option id="com.crt.advproject.link.cpp.lto.optmization.level.1347109947" name="Link-time optimization level" superClass="com.crt.advproject.link.cpp.lto.optmization.level"/>
 								<option id="com.crt.advproject.link.cpp.fpu.1457558556" name="Floating point" superClass="com.crt.advproject.link.cpp.fpu" value="com.crt.advproject.link.cpp.fpu.fpv5sp.hard" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.cpp.manage.255260857" name="Manage linker script" superClass="com.crt.advproject.link.cpp.manage" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.cpp.script.1427340992" name="Linker script" superClass="com.crt.advproject.link.cpp.script" value="frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss_Release.ld" valueType="string"/>
+								<option id="com.crt.advproject.link.cpp.script.1427340992" name="Linker script" superClass="com.crt.advproject.link.cpp.script" value="tss_powered_on_device_learning_fan_anomaly_based_on_frdmmcxa156_Release.ld" valueType="string"/>
 								<option id="com.crt.advproject.link.cpp.scriptdir.1757906708" name="Script path" superClass="com.crt.advproject.link.cpp.scriptdir"/>
 								<option id="com.crt.advproject.link.cpp.crpenable.1477430258" name="Enable automatic placement of Code Read Protection field in image" superClass="com.crt.advproject.link.cpp.crpenable"/>
 								<option id="com.crt.advproject.link.cpp.flashconfigenable.885051968" name="Enable automatic placement of Flash Configuration field in image" superClass="com.crt.advproject.link.cpp.flashconfigenable" value="true" valueType="boolean"/>
@@ -818,7 +820,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss.null.1251130789" name="frdmmcxa156_lvgl_guider_fan_anormaly_detect_tss" projectType="com.crt.advproject.projecttype.exe"/>
+		<project id="dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156.null.1251130789" name="dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" projectType="com.crt.advproject.projecttype.exe"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>

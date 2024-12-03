@@ -1,0 +1,68 @@
+{
+    "date_created": "2024-11-26T16:23:20.804097",
+    "lib_id": "02f34ca42ff519",
+    "lib_checksum": "bee1ff4c90c763eb4f960c408bf2add0",
+    "compiler_info": {
+        "cc_version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.2.rel1 (Build arm-13.7)) 13.2.1 20231009",
+        "cflags": {
+            "mfloat-abi": "hard",
+            "fshort-enums": false,
+            "fshort-wchar": false
+        }
+    },
+    "use_case": "anomaly_detection",
+    "data_info": {
+        "learning_sample_num": 72,
+        "n_samples": 128,
+        "n_channels": 3,
+        "label": [
+            "normal",
+            "anomaly"
+        ]
+    },
+    "platform_info": {
+        "library": true,
+        "emulator": false,
+        "arch": "cortex-m33",
+        "chip": "MCXA153VLH"
+    },
+    "memory_usage (Byte)": {
+        "flash": 12819,
+        "ram": 5012
+    },
+    "model_info": {
+        "name": "IPCA",
+        "type": "CML",
+        "description": "Incremental PCA(Principal Component Analysis) for anomaly detection"
+    },
+    "benchmark": {
+        "performance": {
+            "score": 0.993388563048953,
+            "threshold": 0.9,
+            "balanced_accuracy": 1.0,
+            "f1_score": 1.0,
+            "recall_per_class": [
+                1.0,
+                1.0
+            ],
+            "roc_auc": 1.0,
+            "functional_margin": 0.9999999999999999,
+            "confusion_matrix": [
+                [
+                    90,
+                    0
+                ],
+                [
+                    0,
+                    15
+                ]
+            ]
+        },
+        "estimated_memory_usage (Byte)": {
+            "RAM": 4988,
+            "Heap": 0,
+            "Model_Flash": 0,
+            "Algo_Flash": 6324
+        }
+    }
+}
