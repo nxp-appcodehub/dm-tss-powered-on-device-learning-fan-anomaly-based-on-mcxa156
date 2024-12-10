@@ -103,7 +103,7 @@ def scan_serial():
     
 def select_folder():
     global folder_path
-    folder_path = './'
+    
     folder_path = filedialog.askdirectory(initialdir= './')
     if folder_path:
         folder_path_label.config(text="Selected Folder: " + folder_path)
