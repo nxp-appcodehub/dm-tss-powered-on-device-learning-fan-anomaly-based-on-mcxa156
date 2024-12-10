@@ -1,7 +1,7 @@
 {
-    "date_created": "2024-11-26T16:23:20.804097",
+    "date_created": "2024-12-09T17:37:37.403355",
     "lib_id": "02f34ca42ff519",
-    "lib_checksum": "bee1ff4c90c763eb4f960c408bf2add0",
+    "lib_checksum": "ffe3d18d18cf5a41b63e6febaac3830c",
     "compiler_info": {
         "cc_version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.2.rel1 (Build arm-13.7)) 13.2.1 20231009",
         "cflags": {
@@ -12,7 +12,7 @@
     },
     "use_case": "anomaly_detection",
     "data_info": {
-        "learning_sample_num": 72,
+        "learning_sample_num": 720,
         "n_samples": 128,
         "n_channels": 3,
         "label": [
@@ -27,42 +27,42 @@
         "chip": "MCXA153VLH"
     },
     "memory_usage (Byte)": {
-        "flash": 12819,
-        "ram": 5012
+        "flash": 12059,
+        "ram": 1912
     },
     "model_info": {
-        "name": "IPCA",
+        "name": "ZSM",
         "type": "CML",
-        "description": "Incremental PCA(Principal Component Analysis) for anomaly detection"
+        "description": "Z-score algorithm for anomaly detection"
     },
     "benchmark": {
         "performance": {
-            "score": 0.993388563048953,
+            "score": 0.9440302607359878,
             "threshold": 0.9,
-            "balanced_accuracy": 1.0,
-            "f1_score": 1.0,
+            "balanced_accuracy": 0.9444444444444444,
+            "f1_score": 0.8991596638655461,
             "recall_per_class": [
-                1.0,
+                0.8888888888888888,
                 1.0
             ],
-            "roc_auc": 1.0,
-            "functional_margin": 0.9999999999999999,
+            "roc_auc": 0.9845592592592594,
+            "functional_margin": 0.8943329251589887,
             "confusion_matrix": [
                 [
-                    90,
-                    0
+                    800,
+                    100
                 ],
                 [
                     0,
-                    15
+                    300
                 ]
             ]
         },
         "estimated_memory_usage (Byte)": {
-            "RAM": 4988,
+            "RAM": 4960,
             "Heap": 0,
             "Model_Flash": 0,
-            "Algo_Flash": 6324
+            "Algo_Flash": 2492
         }
     }
 }

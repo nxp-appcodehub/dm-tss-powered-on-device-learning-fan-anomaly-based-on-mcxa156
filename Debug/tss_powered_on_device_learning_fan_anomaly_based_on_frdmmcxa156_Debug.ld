@@ -5,7 +5,7 @@
  * Generated linker script file for MCXA156
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.10.0 [Build 3148] [2024-07-03] on Dec 3, 2024, 2:47:06 PM
+ * MCUXpresso IDE v11.10.0 [Build 3148] [2024-07-03] on Dec 9, 2024, 5:14:35 PM
  */
 
 INCLUDE "tss_powered_on_device_learning_fan_anomaly_based_on_frdmmcxa156_Debug_library.ld"

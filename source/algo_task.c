@@ -40,7 +40,7 @@ float sensor_data[TSS_INPUT_DATA_LEN*TSS_INPUT_DATA_DIM];
 static float model_weight_buffer[MODEL_SIZE];
 uint8_t train_flag = 0;
 uint8_t inference_flag = 0;
-uint8_t train_cnt = 0;
+uint32_t train_cnt = 0;
 static flash_config_t s_flashDriver;
 
 

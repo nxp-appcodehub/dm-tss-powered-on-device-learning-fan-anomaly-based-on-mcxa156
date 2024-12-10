@@ -64,7 +64,7 @@
 #define MAX8BITSTORAGE         (255U)
 #define FXLS8974_DATA_SIZE 6
 
-#define  FIFFO_READ	1
+#define  FIFO_READ	1
 
 #define FIFO_WMRK              20U
 
@@ -78,7 +78,7 @@ const registerwritelist_t cFxls8974ConfigNormal[] = {
     /*! Set Wake Mode ODR Rate as 12.5Hz. */
     {FXLS8974_SENS_CONFIG3, FXLS8974_SENS_CONFIG3_WAKE_ODR_400HZ, FXLS8974_SENS_CONFIG3_WAKE_ODR_MASK},
 /*enable fifo mode*/
-#if FIFFO_READ
+#if FIFO_READ
 	{FXLS8974_BUF_CONFIG1, FXLS8974_BUF_CONFIG1_BUF_TYPE_FIFO | FXLS8974_BUF_CONFIG1_BUF_MODE_STOP_MODE},
 	{FXLS8974_BUF_CONFIG2, FIFO_WMRK},
 
@@ -550,7 +550,7 @@ void sensor_task(void *param)
 
 		if (xEventBits & (EVENT_BIT_1))
 		{
-#if FIFFO_READ
+#if FIFO_READ
 			uint8_t buf_status;
 			status = FXLS8974_I2C_ReadData(&fxls8974Driver, FXLS8974_BUF_ST, &buf_status);
 			if (ARM_DRIVER_OK != status)
@@ -581,24 +581,25 @@ void sensor_task(void *param)
 
 			int16_t x, y ,z;
 
-#if FIFFO_READ
-			for (int i=0;i<fifo_len;i++)
-			{
-				x = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 1] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 0]);
-				y = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 3] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 2]);
-				z = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 5] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 4]);
-				sensor_buf[buf_idx][recv_cnt++] = x;
-				sensor_buf[buf_idx][recv_cnt++] = y;
-				sensor_buf[buf_idx][recv_cnt++] = z;
-
-			}
-#else
-				sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[3] << 8) | registers.reg_addr[2])));
-				sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[5] << 8) | registers.reg_addr[4])));
-				sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[7] << 8) | registers.reg_addr[6])));
-#endif
 			if (data_collect_flag == 0)
 			{
+	#if FIFO_READ
+				for (int i=0;i<fifo_len;i++)
+				{
+					x = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 1] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 0]);
+					y = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 3] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 2]);
+					z = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 5] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 4]);
+					sensor_buf[buf_idx][recv_cnt++] = x;
+					sensor_buf[buf_idx][recv_cnt++] = y;
+					sensor_buf[buf_idx][recv_cnt++] = z;
+
+				}
+	#else
+					sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[3] << 8) | registers.reg_addr[2])));
+					sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[5] << 8) | registers.reg_addr[4])));
+					sensor_buf[buf_idx][recv_cnt++]=(float)(((int16_t)(((int16_t)registers.reg_addr[7] << 8) | registers.reg_addr[6])));
+	#endif
+
 				if (recv_cnt == BUF_CNT)
 				{
 					xQueueSend(qh_NewSample, (void*)sensor_buf[buf_idx], portMAX_DELAY);
@@ -608,14 +609,21 @@ void sensor_task(void *param)
 			}
 			else
 			{
-				if (recv_cnt == BUF_CNT)
-				{
-					for (int i=0;i<recv_cnt/3;i++)
-						PRINTF("%d %d %d\r\n",(int16_t)sensor_buf[buf_idx][i],(int16_t)sensor_buf[buf_idx][i+1],(int16_t)sensor_buf[buf_idx][i+2]);
 
-					recv_cnt = 0;
-					buf_idx ^= 1;
+#if FIFO_READ
+				for (int i=0;i<fifo_len;i++)
+				{
+					x = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 1] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 0]);
+					y = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 3] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 2]);
+					z = (((int16_t)fifo_buffer[i * FXLS8974_DATA_SIZE + 5] << 8) | fifo_buffer[i * FXLS8974_DATA_SIZE + 4]);
+
+					PRINTF("%d %d %d\r\n",(int16_t)x,(int16_t)y,(int16_t)z);
 				}
+#else
+				PRINTF("%d %d %d\r\n",(((int16_t)(((int16_t)registers.reg_addr[3] << 8) | registers.reg_addr[2]))), (((int16_t)(((int16_t)registers.reg_addr[5] << 8) | registers.reg_addr[4])))
+						(((int16_t)(((int16_t)registers.reg_addr[7] << 8) | registers.reg_addr[6]))));
+#endif
+
 
 			}
 
