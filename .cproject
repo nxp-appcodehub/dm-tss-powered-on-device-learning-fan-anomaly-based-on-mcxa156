@@ -276,9 +276,11 @@
 								<option id="gnu.cpp.link.option.strip.523354348" name="Omit all symbol information (-s)" superClass="gnu.cpp.link.option.strip"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.libs.2094246165" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="tss"/>
+									<listOptionValue builtIn="false" value="NXP_Logo_RGB_Colour_alpha_120x40"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.199231632" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/tss}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/generated/images}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.group.1662164615" name="Group libraries (-Wl,--start-group  ...  -Wl,--end-group)" superClass="gnu.cpp.link.option.group"/>
 								<option id="gnu.cpp.link.option.flags.1048765238" name="Linker flags" superClass="gnu.cpp.link.option.flags"/>
@@ -536,7 +538,7 @@
 								<option id="com.crt.advproject.cpp.stackusage.1023049299" name="Generate Stack Usage Info (-fstack-usage)" superClass="com.crt.advproject.cpp.stackusage" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.cpp.config.487468834" name="Obsolete (Config)" superClass="com.crt.advproject.cpp.config" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.cpp.store.1767511436" name="Obsolete (Store)" superClass="com.crt.advproject.cpp.store" useByScannerDiscovery="false"/>
-								<option id="com.crt.advproject.cpp.exe.release.option.optimization.level.430348357" superClass="com.crt.advproject.cpp.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
+								<option id="com.crt.advproject.cpp.exe.release.option.optimization.level.430348357" name="Optimization Level" superClass="com.crt.advproject.cpp.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
 								<inputType id="com.crt.advproject.compiler.cpp.input.1918532152" superClass="com.crt.advproject.compiler.cpp.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gcc.exe.release.1970325050" name="MCU C Compiler" superClass="com.crt.advproject.gcc.exe.release">
@@ -644,7 +646,7 @@
 								<option id="com.crt.advproject.gcc.stackusage.661466025" name="Generate Stack Usage Info (-fstack-usage)" superClass="com.crt.advproject.gcc.stackusage" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.gcc.config.599741572" name="Obsolete (Config)" superClass="com.crt.advproject.gcc.config" useByScannerDiscovery="false"/>
 								<option id="com.crt.advproject.gcc.store.1216574638" name="Obsolete (Store)" superClass="com.crt.advproject.gcc.store" useByScannerDiscovery="false"/>
-								<option id="com.crt.advproject.gcc.exe.release.option.optimization.level.579665624" superClass="com.crt.advproject.gcc.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
+								<option id="com.crt.advproject.gcc.exe.release.option.optimization.level.579665624" name="Optimization Level" superClass="com.crt.advproject.gcc.exe.release.option.optimization.level" useByScannerDiscovery="true"/>
 								<inputType id="com.crt.advproject.compiler.input.1279721474" superClass="com.crt.advproject.compiler.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gas.exe.release.2048869863" name="MCU Assembler" superClass="com.crt.advproject.gas.exe.release">
@@ -682,9 +684,11 @@
 								<option id="gnu.cpp.link.option.strip.2070895932" name="Omit all symbol information (-s)" superClass="gnu.cpp.link.option.strip"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.libs.382030491" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="tss"/>
+									<listOptionValue builtIn="false" value="NXP_Logo_RGB_Colour_alpha_120x40"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.885916719" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/tss}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/generated/images}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.group.340995138" name="Group libraries (-Wl,--start-group  ...  -Wl,--end-group)" superClass="gnu.cpp.link.option.group"/>
 								<option id="gnu.cpp.link.option.flags.336713589" name="Linker flags" superClass="gnu.cpp.link.option.flags"/>
