@@ -34,7 +34,7 @@ void setup_scr_Model_Training(lv_ui *ui)
     //Write codes Model_Training_img_1
     ui->Model_Training_img_1 = lv_img_create(ui->Model_Training);
     lv_obj_add_flag(ui->Model_Training_img_1, LV_OBJ_FLAG_CLICKABLE);
-    lv_img_set_src(ui->Model_Training_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
+    //lv_img_set_src(ui->Model_Training_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
     lv_img_set_pivot(ui->Model_Training_img_1, 50,50);
     lv_img_set_angle(ui->Model_Training_img_1, 0);
     lv_obj_set_pos(ui->Model_Training_img_1, 10, 10);

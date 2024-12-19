@@ -276,7 +276,6 @@
 								<option id="gnu.cpp.link.option.strip.523354348" name="Omit all symbol information (-s)" superClass="gnu.cpp.link.option.strip"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.libs.2094246165" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="tss"/>
-									<listOptionValue builtIn="false" value="NXP_Logo_RGB_Colour_alpha_120x40"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.199231632" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/tss}&quot;"/>
@@ -684,7 +683,6 @@
 								<option id="gnu.cpp.link.option.strip.2070895932" name="Omit all symbol information (-s)" superClass="gnu.cpp.link.option.strip"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.libs.382030491" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="tss"/>
-									<listOptionValue builtIn="false" value="NXP_Logo_RGB_Colour_alpha_120x40"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.885916719" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/tss}&quot;"/>

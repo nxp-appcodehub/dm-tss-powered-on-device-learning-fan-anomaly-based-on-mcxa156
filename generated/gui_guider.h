@@ -71,10 +71,9 @@ extern lv_ui guider_ui;
 void setup_scr_Main(lv_ui *ui);
 void setup_scr_Model_Training(lv_ui *ui);
 void setup_scr_DS_Collection(lv_ui *ui);
-LV_IMG_DECLARE(_NXP_Logo_RGB_Colour_alpha_120x40);
+
 LV_IMG_DECLARE(_fan_normal_on_alpha_160x160);
-LV_IMG_DECLARE(_NXP_Logo_RGB_Colour_alpha_120x40);
-LV_IMG_DECLARE(_NXP_Logo_RGB_Colour_alpha_120x40);
+
 
 LV_FONT_DECLARE(lv_font_montserratMedium_12)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)

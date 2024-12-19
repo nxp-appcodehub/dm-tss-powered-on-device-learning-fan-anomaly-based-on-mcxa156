@@ -34,7 +34,7 @@ void setup_scr_DS_Collection(lv_ui *ui)
     //Write codes DS_Collection_img_1
     ui->DS_Collection_img_1 = lv_img_create(ui->DS_Collection);
     lv_obj_add_flag(ui->DS_Collection_img_1, LV_OBJ_FLAG_CLICKABLE);
-    lv_img_set_src(ui->DS_Collection_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
+    //lv_img_set_src(ui->DS_Collection_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
     lv_img_set_pivot(ui->DS_Collection_img_1, 50,50);
     lv_img_set_angle(ui->DS_Collection_img_1, 0);
     lv_obj_set_pos(ui->DS_Collection_img_1, 10, 10);

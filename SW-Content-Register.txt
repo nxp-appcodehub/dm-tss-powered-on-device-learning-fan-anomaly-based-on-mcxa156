@@ -12,10 +12,5 @@ Origin: NXP (BSD-3-Clause)
         Montserrat Medium Font (SIL OPEN FONT 1.1) - https://github.com/JulietaUla/Montserrat
 
 
-Package name:		libNXP_Logo_RGB_Colour_alpha_120x40.a
-Release version:	1.0
-Outgoing License:       LA_OPT_Online Code Hosting NXP_Software_License - v1.2 October 2023
-License File:           License
-Origin:                 NXP (Proprietary)
 
 

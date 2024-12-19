@@ -34,7 +34,7 @@ void setup_scr_Main(lv_ui *ui)
     //Write codes Main_img_1
     ui->Main_img_1 = lv_img_create(ui->Main);
     lv_obj_add_flag(ui->Main_img_1, LV_OBJ_FLAG_CLICKABLE);
-    lv_img_set_src(ui->Main_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
+    //lv_img_set_src(ui->Main_img_1, &_NXP_Logo_RGB_Colour_alpha_120x40);
     lv_img_set_pivot(ui->Main_img_1, 50,50);
     lv_img_set_angle(ui->Main_img_1, 0);
     lv_obj_set_pos(ui->Main_img_1, 10, 10);
