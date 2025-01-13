@@ -1,11 +1,11 @@
 /*
  * GENERATED FILE - DO NOT EDIT
  * Copyright 2008-2013 Code Red Technologies Ltd,
- * Copyright 2013-2024 NXP
+ * Copyright 2013-2025 NXP
  * Generated linker script file for MCXA156
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.10.0 [Build 3148] [2024-07-03] on Dec 19, 2024, 9:58:01 AM
+ * MCUXpresso IDE v11.10.0 [Build 3148] [2024-07-03] on Jan 13, 2025, 4:40:15 PM
  */
 
 INCLUDE "tss_powered_on_device_learning_fan_anomaly_based_on_frdmmcxa156_Debug_library.ld"

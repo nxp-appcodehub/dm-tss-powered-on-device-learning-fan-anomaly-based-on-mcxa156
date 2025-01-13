@@ -1,11 +1,12 @@
 /*
-* Copyright 2024 NXP
-* NXP Proprietary. This software is owned or controlled by NXP and may only be used strictly in
-* accordance with the applicable license terms. By expressly accepting such terms or by downloading, installing,
-* activating and/or otherwise using the software, you are agreeing that you have read, and that you agree to
-* comply with and are bound by, such license terms.  If you do not agree to be bound by the applicable license
-* terms, then you may not retain, install, activate or otherwise use the software.
-*/
+ * Copyright 2024-2025 NXP
+ * NXP Proprietary. This software is owned or controlled by NXP and may only be used
+ * strictly in accordance with the applicable license terms. By expressly accepting such terms or by
+ * downloading, installing, activating and/or otherwise using the software, you are agreeing that you
+ * have read, and that you agree to comply with and are bound by, such license terms. If you do not
+ * agree to be bound by the applicable license terms, then you may not retain, install, activate or
+ * otherwise use the software.
+ */
 
 /*
  * Note:
@@ -15,7 +16,7 @@
 #ifndef _TIMESERIES_H_
 #define _TIMESERIES_H_
 
-#define ANOMALY_DETECTION_LIB_ID "02f34ca42ff519"
+#define ANOMALY_DETECTION_LIB_ID "72568a617d6459"
 
 #define TSS_INPUT_DATA_LEN                           (128)
 #define TSS_INPUT_DATA_DIM                           (3)
@@ -26,23 +27,24 @@
 
 #define SUPPORT_ODL          /* Support On Device Learning */
 
-#define MODEL_SIZE                                   (301)
+#define MODEL_SIZE                                   (75)
 
-#define TSS_RECOMMEND_LEARNING_SAMPLE_NUM            (840)
+#define TSS_RECOMMEND_LEARNING_SAMPLE_NUM            (36)
 
 /* Error status returned functions in the Time Series Studio library */
 typedef enum
 {
-    TSS_SUCCESS             = 0, /* No error */
-    TSS_STATE_ERROR         = 1, /* State is incorrect */
-    TSS_BOARD_ERROR         = 2, /* Board information is incorrect */
-    TSS_MEMORY_ERROR        = 3, /* Memory error caused by the HEAP Overflow */
-    TSS_PREDICT_NOT_ENABLED = 4, /* Predict function is not enabled */
-    TSS_LEARNING_ERROR      = 5, /* Errors occurs during the learning process */
-    TSS_LEARNING_NOT_ENOUGH = 6, /* Samples are not enough for learning */
-    TSS_NOT_READY           = 7, /* Function is not ready but planed to support */
-    TSS_LICENSE_ERROR       = 8, /* Invalid license */
-    TSS_UNKNOWN_ERROR       = 9, /* Unknown error */
+    TSS_SUCCESS                 = 0, /* No error */
+    TSS_STATE_ERROR             = 1, /* State is incorrect */
+    TSS_BOARD_ERROR             = 2, /* Board information is incorrect */
+    TSS_MEMORY_ERROR            = 3, /* Memory error caused by the HEAP Overflow */
+    TSS_PREDICT_NOT_ENABLED     = 4, /* Predict function is not enabled */
+    TSS_LEARNING_ERROR          = 5, /* Errors occurs during the learning process */
+    TSS_LEARNING_NOT_ENOUGH     = 6, /* Not enough calls to learning */
+    TSS_RECOMMEND_LEARNING_DONE = 7, /* Reached the recommended calls to learning */
+    TSS_NOT_READY               = 8, /* Function is not ready but planed to support */
+    TSS_LICENSE_ERROR           = 9, /* Invalid license */
+    TSS_UNKNOWN_ERROR           = 10, /* Unknown error */
 } tss_status;
 
 #ifdef __cplusplus
@@ -50,44 +52,16 @@ extern "C" {
 #endif
 
 static const float model_buffer[MODEL_SIZE] = {
-    840.00000000f, 60796.92826253f, 168880.35628480f, 76254.65429564f, 32190.00555422f, 23511.13095000f, 16538.54452337f, 12304.67267230f,
-    9424.61971073f, 8674.06211584f, 7545.74687274f, 6115.46848205f, 5190.75415333f, 690.40794752f, 631.32670292f, 919.52547724f,
-    753.17431928f, 1306.66988369f, 766.99553857f, 1319.24954809f, 632.27097680f, 522.67461419f, 603.79878872f, 971.83459743f,
-    940.17261131f, 1083.56783983f, 736.43475952f, 1278.27500450f, 592.71078175f, 1012.25516521f, 966.66684552f, 1775.63915740f,
-    1029.14424471f, 1580.02845205f, 839.67668352f, 1778.99153813f, 771.86627653f, 100961.88935742f, 108023.33456731f, 551423.75044049f,
-    182187.70940850f, 1440513.65360990f, 207047.57043602f, 367458.51957058f, 136676.06155966f, 174764.85167834f, 188540.26938831f, 513845.72730737f,
-    204433.50897926f, 732907.77192547f, 164900.54896491f, 328577.19435607f, 177484.90543362f, 313285.52246842f, 71787.21402494f, 1378028.16247409f,
-    174349.71066792f, 1365314.75774688f, 238527.13988839f, 492769.37942346f, 295740.55096876f, 0.06850480f, 0.09590438f, 0.25999873f,
-    0.09600720f, 0.43685588f, 0.08076563f, 0.02477562f, 0.10853450f, 0.13899507f, 0.13762279f, 0.26048042f,
-    0.05189425f, 0.31276936f, 0.08063749f, 0.17678164f, 0.14376255f, 0.16582573f, 0.01682530f, 0.42116427f,
-    -0.09760256f, 0.42072593f, -0.00989718f, 0.13544085f, 0.15602699f, -0.10699102f, -0.14052187f, -0.15900862f,
-    -0.25030295f, 0.24680856f, -0.29824976f, 0.32167720f, -0.10989034f, -0.09196229f, -0.16878495f, -0.04038360f,
-    -0.33089027f, 0.01641755f, -0.28079098f, 0.12377525f, -0.06299195f, -0.18468225f, -0.11504221f, 0.17886356f,
-    0.13426918f, 0.04905772f, -0.25953744f, 0.39922443f, -0.20609847f, -0.14719984f, 0.07615343f, 0.14108711f,
-    0.17723841f, -0.04404302f, 0.09660125f, 0.53525777f, 0.18912633f, 0.13504113f, 0.09084008f, 0.01776580f,
-    0.15671215f, -0.01023577f, -0.01297383f, 0.20288262f, 0.06069195f, 0.24746441f, -0.04221251f, -0.30483656f,
-    0.28880681f, -0.23372892f, -0.34653159f, 0.09409394f, 0.26128537f, -0.13298496f, -0.01645318f, -0.08914972f,
-    -0.07742252f, -0.04305237f, 0.24141202f, 0.03975206f, 0.03607438f, -0.02701727f, -0.05234587f, 0.02111567f,
-    0.19183122f, 0.12136298f, 0.17204214f, -0.08940688f, 0.05506371f, -0.13133759f, 0.09108091f, 0.10478505f,
-    -0.06742783f, -0.35891313f, 0.41483926f, 0.66975388f, 0.13589375f, -0.03603049f, -0.08537009f, 0.03978596f,
-    -0.09806267f, -0.21290956f, -0.21523583f, -0.37409481f, -0.14832429f, 0.07622126f, -0.02639955f, 0.24631912f,
-    -0.09890313f, 0.41547356f, -0.02696991f, 0.47614282f, 0.15715043f, 0.11739735f, 0.01715455f, 0.05468385f,
-    0.04558048f, -0.43592862f, -0.10572326f, -0.06605422f, -0.01328440f, 0.39555785f, 0.10970298f, 0.06956270f,
-    -0.09529619f, -0.31253107f, -0.17417649f, 0.29476688f, 0.05440766f, 0.05097194f, 0.11040454f, 0.07151166f,
-    -0.23563057f, 0.04324308f, 0.02901730f, -0.15379115f, 0.01669894f, -0.16467435f, 0.54015103f, 0.15120021f,
-    -0.27994314f, -0.08417248f, -0.17088933f, 0.00241709f, 0.20309628f, -0.17002767f, -0.12461097f, 0.48851409f,
-    -0.09496234f, 0.22618410f, 0.09278772f, 0.15848040f, -0.00327173f, -0.06164630f, -0.15496319f, 0.35410198f,
-    -0.09438101f, 0.19972247f, -0.05695424f, -0.18674370f, -0.19683573f, -0.32105297f, -0.11661515f, -0.28014617f,
-    -0.25631343f, -0.18568737f, 0.07067547f, -0.20846569f, -0.01891447f, -0.21717941f, -0.03202160f, 0.09443235f,
-    0.15626936f, 0.07228195f, 0.09693194f, -0.01308027f, 0.08372548f, -0.21134667f, -0.02049428f, -0.08985072f,
-    0.07672478f, -0.14743062f, -0.05208820f, -0.08616753f, -0.28360343f, -0.02781926f, 0.07320264f, 0.67421799f,
-    0.16553056f, -0.37307078f, -0.13505351f, -0.26500699f, 0.09779497f, -0.28375079f, -0.11531920f, 0.06342545f,
-    0.03305419f, -0.33110948f, 0.18607029f, -0.09240856f, 0.03285285f, -0.30524241f, -0.25795884f, -0.14129920f,
-    -0.16489198f, 0.29664770f, -0.08259340f, 0.12043971f, -0.26415673f, 0.02044303f, 0.23319009f, -0.09315911f,
-    0.11703746f, 0.42493026f, -0.00906693f, 0.06083731f, 0.31575263f, 0.04242274f, -0.07234161f, -0.29532314f,
-    -0.13743701f, 0.46306493f, 0.01941178f, 0.19882010f, 0.01870133f, -0.16580290f, -0.07541153f, -0.13340750f,
-    0.02881575f, 0.00317041f, 0.01940126f, 0.37971166f, -0.06283680f, 0.13986561f, 0.42788133f, -0.15721423f,
-    -0.10298642f, -0.11952077f, 0.30917480f, -0.28624927f, 0.04555948f,
+    840.00000000f, 851.51751944f, 1199.89704158f, 522.41614799f, 511.50576793f, 487.50513627f, 485.88442305f, 471.91437796f,
+    445.36728165f, 755.56524317f, 736.06793994f, 705.68566513f, 55748.90609086f, 59438.34701123f, 42496.02961491f, 58924.60206227f,
+    62332.40540488f, 51611.82059051f, 56999.00245200f, 59865.69160935f, 56112.42148776f, 336.45395696f, 316.44114496f, 309.29947121f,
+    328.68002237f, 308.27950022f, 291.27258274f, 621.97711903f, 590.91020935f, 618.57572061f, 913.00854387f, 922.15685932f,
+    785.23705964f, 982.96008181f, 1141.06060657f, 1024.99594006f, 1124.89028796f, 1129.77346669f, 1141.01373166f, 802.72924793f,
+    728.88665761f, 700.40621938f, 676.55047597f, 664.43377676f, 604.70172110f, 994.97119126f, 1017.32373032f, 924.30880723f,
+    796.08581527f, 880.35375959f, 813.00415023f, 857.69982893f, 824.07019026f, 857.75067122f, 853.22692854f, 672.42999254f,
+    729.99310288f, 745.29691352f, 711.60018260f, 691.28626547f, 748.62642455f, 746.51683910f, 696.58499822f, 1205.63498643f,
+    1174.93313939f, 1181.28617183f, 787.13958581f, 776.66615025f, 696.02952235f, 685.68599403f, 678.95176233f, 605.40200390f,
+    956.91122821f, 976.48029007f, 875.15282685f,
 };
 
 /**
