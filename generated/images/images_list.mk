@@ -1,1 +1,1 @@
-GEN_CSRCS += _NXP_Logo_RGB_Colour_alpha_120x40.c _fan_normal_on_alpha_160x160.c
+GEN_CSRCS += _fan_normal_on_alpha_160x160.c
