@@ -1,0 +1,1 @@
+GEN_CSRCS += _fan_normal_on_alpha_160x160.c

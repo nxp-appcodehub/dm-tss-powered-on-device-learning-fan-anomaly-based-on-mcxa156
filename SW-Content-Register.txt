@@ -1,0 +1,16 @@
+Package: dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156
+Version: 1.0
+Outgoing License: LA_OPT_Online Code Hosting NXP_Software_License - v1.3 December 2024 
+License File: LICENSE
+Description and comments: This demo showing on device training anomlay detection based on MCXA156 powered by eIQ Time Seris Studio.
+Release Location: https://github.com/nxp-appcodehub/dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156
+Origin: NXP (BSD-3-Clause)
+        NXP (proprietary)
+        CMSIS 5.6.0 (Apache-2.0) - https://github.com/ARM-software/CMSIS_5/releases/tag/5.6.0
+        littlevgl 8.3.10 (MIT License) - https://github.com/lvgl/lvgl
+        freertos 11.0.1  (MIT License) - https://github.com/FreeRTOS/FreeRTOS-Kernel
+        Montserrat Medium Font (SIL OPEN FONT 1.1) - https://github.com/JulietaUla/Montserrat
+
+
+
+
