@@ -38,6 +38,8 @@ typedef struct
 	lv_obj_t *Model_Training_label_1;
 	lv_obj_t *Model_Training_btn_1;
 	lv_obj_t *Model_Training_btn_1_label;
+	lv_obj_t *Model_Training_btn_default;
+	lv_obj_t *Model_Training_btn_default_label;
 	lv_obj_t *Model_Training_barModelTrainProgress;
 	lv_obj_t *DS_Collection;
 	bool DS_Collection_del;

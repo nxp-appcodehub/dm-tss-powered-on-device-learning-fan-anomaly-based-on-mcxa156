@@ -116,6 +116,48 @@ void save_model_to_flash()
 	taskEXIT_CRITICAL();
 }
 
+void algo_restore_model()
+{
+	uint32_t pflashBlockBase  = 0U;
+	uint32_t pflashTotalSize  = 0U;
+	uint32_t pflashSectorSize = 0U;
+	uint32_t PflashPageSize   = 0U;
+	int status;
+
+	memset(&s_flashDriver, 0, sizeof(flash_config_t));
+	FLASH_API->flash_init(&s_flashDriver);
+
+	FLASH_API->flash_get_property(&s_flashDriver, kFLASH_PropertyPflashBlockBaseAddr, &pflashBlockBase);
+	FLASH_API->flash_get_property(&s_flashDriver, kFLASH_PropertyPflashSectorSize, &pflashSectorSize);
+	FLASH_API->flash_get_property(&s_flashDriver, kFLASH_PropertyPflashTotalSize, &pflashTotalSize);
+	FLASH_API->flash_get_property(&s_flashDriver, kFLASH_PropertyPflashPageSize, &PflashPageSize);
+
+	model_wei.wei_len = 0x0;
+	model_wei.magic = 0x0;
+	model_wei.crc = 0x00;
+
+	taskENTER_CRITICAL();
+	// total 2K sector erase, the model must be little than this
+
+	status = FLASH_API->flash_erase_sector(&s_flashDriver, __base_m_model, 0x2000, kFLASH_ApiEraseKey);
+	if (status != kStatus_Success)
+	{
+		PRINTF("erase flash failed %d\r\n",status);
+		taskEXIT_CRITICAL();
+		return;
+	}
+
+	status = tss_ad_init(model_buffer);
+	if (status != TSS_SUCCESS)
+	{
+		PRINTF("Tss init failed %d\r\n",status);
+		return;
+	}
+
+	PRINTF("Reset to default model\r\n");
+	taskEXIT_CRITICAL();
+}
+
 void app_algo_task(void* parameters)
 {
 	QueueHandle_t qh_NewSample = (QueueHandle_t)parameters;
@@ -186,6 +228,16 @@ void app_algo_task(void* parameters)
 		}
 
 	}
+}
+
+void algoo_stop_inference()
+{
+	inference_flag = 0;
+}
+
+void algoo_start_inference()
+{
+	inference_flag = 1;
 }
 
 void algo_start_train()
