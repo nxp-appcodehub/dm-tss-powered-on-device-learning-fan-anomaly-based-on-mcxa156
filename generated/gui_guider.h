@@ -41,6 +41,11 @@ typedef struct
 	lv_obj_t *Model_Training_btn_default;
 	lv_obj_t *Model_Training_btn_default_label;
 	lv_obj_t *Model_Training_barModelTrainProgress;
+	lv_obj_t *Model_Training_label_2;
+	lv_obj_t *Model_Training_sw_1;
+	lv_obj_t *Model_Training_repeat_count;
+	lv_obj_t *Model_Training_label_3;
+	lv_obj_t *Model_Training_repeat_label;
 	lv_obj_t *DS_Collection;
 	bool DS_Collection_del;
 	lv_obj_t *DS_Collection_img_1;

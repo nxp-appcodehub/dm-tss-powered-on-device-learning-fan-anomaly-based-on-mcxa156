@@ -23,6 +23,8 @@ extern void algo_restore_model();
 extern void app_gui_fan_icon_stop_ratate();
 extern void algoo_stop_inference();
 extern void algoo_start_inference();
+extern void algo_change_train_from_beggining(int flag);
+extern void algo_set_train_repeat_count(int count);
 static void Main_Main_btnMainSwScr_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -140,8 +142,63 @@ static void Model_btn_default_event_handler(lv_event_t *e)
 	}
 }
 
+static void Model_Training_Model_Training_sw1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+
+    switch (code) {
+    	case LV_EVENT_CLICKED:
+    	{
+    		lv_obj_t * status_obj = lv_event_get_target(e);
+    		int status = lv_obj_has_state(status_obj, LV_STATE_CHECKED) ? 1 : 0;
+    		switch(status) {
+    		case 0:
+    		{
+    			algo_change_train_from_beggining(0);
+    			break;
+    		}
+    		case 1:
+    		{
+    			algo_change_train_from_beggining(1);
+    			break;
+    		}
+    		default:
+    			break;
+    		}
+    		break;
+    	}
+    	default:
+    		break;
+    	}
+
+}
+
+
+static void Model_Training_Model_Training_repeat_count_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_ui *ui = (lv_ui *)e->user_data;
+	char string[10] = {0};
+	int count;
+	switch (code) {
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		lv_obj_t * status_obj = lv_event_get_target(e);
+		count = lv_slider_get_value(status_obj);
+
+		algo_set_train_repeat_count(count);
+		sprintf(string, "%d",count);
+		lv_label_set_text(ui->Model_Training_repeat_label, string);
+		break;
+	}
+	default:
+		break;
+	}
+}
 void events_init_Model_Training (lv_ui *ui)
 {
+	lv_obj_add_event_cb(ui->Model_Training_repeat_count, Model_Training_Model_Training_repeat_count_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Model_Training_sw_1, Model_Training_Model_Training_sw1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->Model_Training_Main_btnMainSwScr, Model_Training_Main_btnMainSwScr_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->Model_Training_btn_1, Model_Training_btn_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->Model_Training_btn_default, Model_btn_default_event_handler, LV_EVENT_ALL, ui);

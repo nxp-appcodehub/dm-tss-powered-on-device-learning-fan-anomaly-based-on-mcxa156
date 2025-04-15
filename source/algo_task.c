@@ -42,7 +42,8 @@ uint8_t train_flag = 0;
 uint8_t inference_flag = 0;
 uint32_t train_cnt = 0;
 static flash_config_t s_flashDriver;
-
+static train_from_beginning = 0;
+static uint32_t train_repeat_count = 1;
 
 extern void app_gui_update_score(float score, float health_thres);
 void app_gui_update_progress_bar(int percent);
@@ -114,6 +115,18 @@ void save_model_to_flash()
 	}
 	PRINTF("Save Model to flash sucess\r\n");
 	taskEXIT_CRITICAL();
+}
+
+
+void algo_change_train_from_beggining(int flag)
+{
+	train_from_beginning = flag;
+}
+
+void algo_set_train_repeat_count(int count)
+{
+	if(count > 0 && count < 6)
+		train_repeat_count = count;
 }
 
 void algo_restore_model()
@@ -212,13 +225,14 @@ void app_algo_task(void* parameters)
 			status = tss_ad_learn(sensor_data);
 			train_cnt ++;
 			//update train progress
-			app_gui_update_progress_bar((int)((train_cnt*100) / TSS_RECOMMEND_LEARNING_SAMPLE_NUM));
+			app_gui_update_progress_bar((int)((train_cnt*100) / (TSS_RECOMMEND_LEARNING_SAMPLE_NUM*train_repeat_count)));
 			PRINTF("Train %d times\r\n",train_cnt);
 
-			if (train_cnt == TSS_RECOMMEND_LEARNING_SAMPLE_NUM)
+			if (train_cnt == (TSS_RECOMMEND_LEARNING_SAMPLE_NUM*train_repeat_count))
 			{
 				train_flag = 0;
 				train_cnt = 0;
+				train_repeat_count = 1;
 				//update train progress
 				tss_ad_export(model_wei.weight);
 				//save weight to flash
@@ -242,6 +256,19 @@ void algoo_start_inference()
 
 void algo_start_train()
 {
+	int status;
+
+	if (train_from_beginning)
+	{
+		train_from_beginning = 0;
+		status = tss_ad_init(NULL);
+		if (status != TSS_SUCCESS)
+		{
+			PRINTF("Tss init failed %d\r\n",status);
+			return;
+		}
+	}
+
 	train_flag = 1;
 	inference_flag = 0;
 }

@@ -165,6 +165,128 @@ void setup_scr_Model_Training(lv_ui *ui)
     lv_obj_set_style_pad_left(ui->Model_Training_barModelTrainProgress, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->Model_Training_barModelTrainProgress, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+    //Write codes Model_Training_sw_1
+	ui->Model_Training_sw_1 = lv_switch_create(ui->Model_Training);
+	lv_obj_set_pos(ui->Model_Training_sw_1, 282, 79);
+	lv_obj_set_size(ui->Model_Training_sw_1, 40, 20);
+
+	//Write style for Model_Training_sw_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Model_Training_sw_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Model_Training_sw_1, lv_color_hex(0xe6e2e6), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_sw_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->Model_Training_sw_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_sw_1, 10, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Model_Training_sw_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for Model_Training_sw_1, Part: LV_PART_INDICATOR, State: LV_STATE_CHECKED.
+	lv_obj_set_style_bg_opa(ui->Model_Training_sw_1, 255, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_color(ui->Model_Training_sw_1, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_sw_1, LV_GRAD_DIR_NONE, LV_PART_INDICATOR|LV_STATE_CHECKED);
+	lv_obj_set_style_border_width(ui->Model_Training_sw_1, 0, LV_PART_INDICATOR|LV_STATE_CHECKED);
+
+	//Write style for Model_Training_sw_1, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Model_Training_sw_1, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Model_Training_sw_1, lv_color_hex(0xffffff), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_sw_1, LV_GRAD_DIR_NONE, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->Model_Training_sw_1, 0, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_sw_1, 10, LV_PART_KNOB|LV_STATE_DEFAULT);
+
+	//Write codes Model_Training_label_2
+	ui->Model_Training_label_2 = lv_label_create(ui->Model_Training);
+	lv_label_set_text(ui->Model_Training_label_2, "Train from beginning ");
+	lv_label_set_long_mode(ui->Model_Training_label_2, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->Model_Training_label_2, 49, 79);
+	lv_obj_set_size(ui->Model_Training_label_2, 219, 33);
+
+	//Write style for Model_Training_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->Model_Training_label_2, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->Model_Training_label_2, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->Model_Training_label_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->Model_Training_label_2, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->Model_Training_label_2, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Model_Training_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes Model_Training_repeat_count
+	ui->Model_Training_repeat_count = lv_slider_create(ui->Model_Training);
+	lv_slider_set_range(ui->Model_Training_repeat_count, 1, 5);
+	lv_slider_set_mode(ui->Model_Training_repeat_count, LV_SLIDER_MODE_NORMAL);
+	lv_slider_set_value(ui->Model_Training_repeat_count, 1, LV_ANIM_OFF);
+	lv_obj_set_pos(ui->Model_Training_repeat_count, 206, 114);
+	lv_obj_set_size(ui->Model_Training_repeat_count, 117, 6);
+
+	//Write style for Model_Training_repeat_count, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Model_Training_repeat_count, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Model_Training_repeat_count, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_repeat_count, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_repeat_count, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_outline_width(ui->Model_Training_repeat_count, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Model_Training_repeat_count, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for Model_Training_repeat_count, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Model_Training_repeat_count, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Model_Training_repeat_count, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_repeat_count, LV_GRAD_DIR_NONE, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_repeat_count, 50, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+
+	//Write style for Model_Training_repeat_count, Part: LV_PART_KNOB, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Model_Training_repeat_count, 255, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Model_Training_repeat_count, lv_color_hex(0x2195f6), LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->Model_Training_repeat_count, LV_GRAD_DIR_NONE, LV_PART_KNOB|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_repeat_count, 50, LV_PART_KNOB|LV_STATE_DEFAULT);
+
+	//Write codes Model_Training_label_3
+	ui->Model_Training_label_3 = lv_label_create(ui->Model_Training);
+	lv_label_set_text(ui->Model_Training_label_3, "Repeat Count");
+	lv_label_set_long_mode(ui->Model_Training_label_3, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->Model_Training_label_3, 49, 108);
+	lv_obj_set_size(ui->Model_Training_label_3, 141, 32);
+
+	//Write style for Model_Training_label_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->Model_Training_label_3, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->Model_Training_label_3, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->Model_Training_label_3, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->Model_Training_label_3, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->Model_Training_label_3, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Model_Training_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write codes Model_Training_repeat_label
+	ui->Model_Training_repeat_label = lv_label_create(ui->Model_Training);
+	lv_label_set_text(ui->Model_Training_repeat_label, "1");
+	lv_label_set_long_mode(ui->Model_Training_repeat_label, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->Model_Training_repeat_label, 331, 108);
+	lv_obj_set_size(ui->Model_Training_repeat_label, 38, 22);
+
+	//Write style for Model_Training_repeat_label, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->Model_Training_repeat_label, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->Model_Training_repeat_label, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->Model_Training_repeat_label, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->Model_Training_repeat_label, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->Model_Training_repeat_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Model_Training_repeat_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     //The custom code of Model_Training.
 
 
