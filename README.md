@@ -10,7 +10,7 @@ The Appliccation is powered by IKM(Incremental KMeans for anomaly detection) mod
 Model size is 7 KB and RAM requirement is 4 KB
 Model inference during is 6ms 
 
-How to train the model, please refer to AN14549 from nxp.com.
+How to train the model, please refer to [AN14549](https://www.nxp.com/docs/en/application-note/AN14549.pdf) from nxp.com.
 
 Below charts are the block of system and software workflow.
 
@@ -123,6 +123,10 @@ Import "dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" from App
  
 
 ## 5. FAQs<a name="step5"></a>
+
+Insufficient on-device training epoches will lead to a significant decline in model accuracy. Solution: Increase the number of training epoches to achieve better accuracy.  
+
+If want to use the default model, click the button "Default" in the Trainer
 
 ## 6. Support<a name="step6"></a>
 
