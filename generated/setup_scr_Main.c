@@ -14,7 +14,7 @@
 #include "widgets_init.h"
 #include "custom.h"
 
-
+extern void Setup_main_windows();
 
 void setup_scr_Main(lv_ui *ui)
 {
