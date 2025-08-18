@@ -155,7 +155,7 @@ Questions regarding the content/correctness of this example can be entered as Is
 | Version | Description / Update                           | Date                        |
 |:-------:|------------------------------------------------|----------------------------:|
 | 1.0     | Initial release on Application Code Hub        | November 27<sup>th</sup> 2024 |
-
+| 1.1     | Update to V1.1        						   | August 18<sup>th</sup> 2025 |
 ## Licensing
 
 LA_OPT_NXP_Software_License v58
