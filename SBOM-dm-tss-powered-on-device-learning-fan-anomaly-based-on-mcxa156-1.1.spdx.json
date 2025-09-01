@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2025-08-18T08:42:25Z",
+    "created": "2025-09-01T08:35:52Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -32,38 +32,37 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-f872a562-49f7-464f-a9a6-2ceb45966850",
-      "name": "CMSIS_5",
-      "versionInfo": "5.9.0",
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "homepage": "https://github.com/ARM-software/CMSIS_5",
-      "downloadLocation": "NOASSERTION",
-      "originator": "Organization: CMSIS_5",
+      "SPDXID": "SPDXRef-package-3bb63d5c-36a2-4f35-bb49-6e83cc19917d",
+      "name": "CMSIS",
+      "versionInfo": "6.1.0",
+      "licenseConcluded": "(Zlib AND BSD-3-Clause)",
+      "licenseDeclared": "(Zlib AND BSD-3-Clause)",
+      "downloadLocation": "https://www.keil.arm.com/",
+      "originator": "Organization: CMSIS",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-760ae06d-55e0-4b14-a2b3-6a0385170ae3",
+      "SPDXID": "SPDXRef-package-9159f776-66ee-428e-9437-a69d570e4938",
       "name": "FreeRTOS Real Time Kernel",
-      "versionInfo": "202012.05-LTS",
+      "versionInfo": "202411.00",
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "homepage": "https://sourceforge.net/projects/freertos",
       "downloadLocation": "NOASSERTION",
-      "originator": "Organization: freertos",
+      "originator": "Organization: FreeRTOS Real Time Kernel",
       "supplier": "NOASSERTION",
       "externalRefs": [
         {
-          "referenceCategory": "OTHER",
-          "referenceLocator": "d4838766-ccde-428f-806a-30840af265dc",
-          "referenceType": "BlackDuck-ComponentOrigin"
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:o:amazon:freertos:202411.00:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
         },
         {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/FreeRTOS/FreeRTOS-LTS@202012.05-LTS",
-          "referenceType": "purl"
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:amazon:freertos:202411.00:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
         }
       ],
       "filesAnalyzed": false
@@ -78,18 +77,7 @@
       "downloadLocation": "NOASSERTION",
       "originator": "Organization: lvgl",
       "supplier": "NOASSERTION",
-      "externalRefs": [
-        {
-          "referenceCategory": "OTHER",
-          "referenceLocator": "8653508e-f279-49fb-a2e2-96a8430ba15f",
-          "referenceType": "BlackDuck-ComponentOrigin"
-        },
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/lvgl/lv_drivers@v8.3.0",
-          "referenceType": "purl"
-        }
-      ],
+      "externalRefs": [],
       "filesAnalyzed": false
     }
   ],
@@ -101,13 +89,18 @@
     },
     {
       "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
-      "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-760ae06d-55e0-4b14-a2b3-6a0385170ae3"
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-9159f776-66ee-428e-9437-a69d570e4938"
     },
     {
       "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
-      "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-760ae06d-55e0-4b14-a2b3-6a0385170ae3"
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-9159f776-66ee-428e-9437-a69d570e4938"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-3bb63d5c-36a2-4f35-bb49-6e83cc19917d"
     },
     {
       "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
@@ -117,17 +110,12 @@
     {
       "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-806f8d4a-de66-4900-a8ce-98ce7b816a35"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
-      "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-f872a562-49f7-464f-a9a6-2ceb45966850"
+      "relatedSpdxElement": "SPDXRef-package-3bb63d5c-36a2-4f35-bb49-6e83cc19917d"
     },
     {
       "spdxElementId": "SPDXRef-package-6c15e941-9a6d-481b-9345-700068f1449f",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-f872a562-49f7-464f-a9a6-2ceb45966850"
+      "relatedSpdxElement": "SPDXRef-package-806f8d4a-de66-4900-a8ce-98ce7b816a35"
     }
   ]
 }
