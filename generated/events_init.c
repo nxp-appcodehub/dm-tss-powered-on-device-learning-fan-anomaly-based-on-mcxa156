@@ -126,7 +126,7 @@ static void Model_btn_default_event_handler(lv_event_t *e)
 	case LV_EVENT_CLICKED:
 	{
 
-		static  char *btns_txt[] = {"Yes", "No",""};
+		static const char *btns_txt[] = {"Yes", "No",""};
 		lv_obj_t *mbox1 = lv_msgbox_create(ui->Model_Training, "Warning", "Reset to default Model ?",btns_txt,1);
 
 		lv_obj_align(mbox1,  LV_ALIGN_CENTER, 0, 0);

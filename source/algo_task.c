@@ -42,7 +42,7 @@ uint8_t train_flag = 0;
 uint8_t inference_flag = 0;
 uint32_t train_cnt = 0;
 static flash_config_t s_flashDriver;
-static train_from_beginning = 0;
+static int train_from_beginning = 0;
 static uint32_t train_repeat_count = 1;
 
 extern void app_gui_update_score(float score, float health_thres);
@@ -93,7 +93,7 @@ void save_model_to_flash()
 	taskENTER_CRITICAL();
 	// total 2K sector erase, the model must be little than this
 
-	status = FLASH_API->flash_erase_sector(&s_flashDriver, __base_m_model, 0x2000, kFLASH_ApiEraseKey);
+	status = FLASH_API->flash_erase_sector(&s_flashDriver, (uint32_t)__base_m_model, 0x2000, kFLASH_ApiEraseKey);
 	if (status != kStatus_Success)
 	{
 		PRINTF("erase flash failed %d\r\n",status);
@@ -103,9 +103,9 @@ void save_model_to_flash()
 
 	uint8_t *model = (uint8_t*)&model_wei;
 	uint32_t model_len = sizeof(model_wei);
-	for(int i = 0; i < model_len; i += 256){
+	for(uint32_t i = 0; i < model_len; i += 256){
 
-		status = FLASH_API->flash_program_page(&s_flashDriver, __base_m_model + i, (uint8_t*)model + i, 256);
+		status = FLASH_API->flash_program_page(&s_flashDriver, (uint32_t)(__base_m_model + i), (uint8_t*)model + i, 256);
 		if (status != kStatus_Success)
 		{
 			PRINTF("write flash failed %d\r\n",status);
@@ -152,7 +152,7 @@ void algo_restore_model()
 	taskENTER_CRITICAL();
 	// total 2K sector erase, the model must be little than this
 
-	status = FLASH_API->flash_erase_sector(&s_flashDriver, __base_m_model, 0x2000, kFLASH_ApiEraseKey);
+	status = FLASH_API->flash_erase_sector(&s_flashDriver, (uint32_t)__base_m_model, 0x2000, kFLASH_ApiEraseKey);
 	if (status != kStatus_Success)
 	{
 		PRINTF("erase flash failed %d\r\n",status);
@@ -174,22 +174,25 @@ void algo_restore_model()
 void app_algo_task(void* parameters)
 {
 	QueueHandle_t qh_NewSample = (QueueHandle_t)parameters;
-	float *model_weigth_buffer;
+	const float *model_weigth_buffer = model_buffer;
 	//load weight buffer from flash
-	model_save_weight_t *saved_wei = __base_m_model;
+	model_save_weight_t *saved_wei = (model_save_weight_t *)__base_m_model;
 	if ((saved_wei->magic == MODEL_MAGIC) && (MODEL_SIZE == saved_wei->wei_len))
 	{
-		uint32_t crc = crc32(saved_wei->weight,saved_wei->wei_len);
+		uint32_t crc = crc32((uint8_t*)saved_wei->weight,saved_wei->wei_len);
 		if (crc == saved_wei->crc)
 		{
 			PRINTF("Load custom model in flash\r\n");
-			model_weigth_buffer = (float *)saved_wei->weight;
+			model_weigth_buffer = saved_wei->weight;
+		}
+		else
+		{
+			PRINTF("Saved model CRC mismatch, load default model\r\n");
 		}
 	}
 	else
 	{
 		PRINTF("Load default model\r\n");
-		model_weigth_buffer = model_buffer;
 	}
 
 	int status = tss_ad_init(model_weigth_buffer);
