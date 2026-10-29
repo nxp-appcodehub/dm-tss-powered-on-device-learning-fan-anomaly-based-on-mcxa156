@@ -78,12 +78,6 @@ const tss_algo_attribute_t *APP_TSS_Init(void)
         return NULL;
     }
 
-    if (attr->model_size > APP_TSS_MODEL_MAX_FLOATS)
-    {
-        PRINTF("TSS: model has %u weights, the flash record holds %u\r\n", attr->model_size,
-               (unsigned int)APP_TSS_MODEL_MAX_FLOATS);
-        return NULL;
-    }
 
     if (0U == attr->odl_supported)
     {

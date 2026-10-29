@@ -1,6 +1,6 @@
 {
-    "date_created": "2026-10-29T06:57:00.854271",
-    "lib_checksum": "6bb0d38b93618a90fc9866ed7f19efb2",
+    "date_created": "2026-10-29T09:37:25.208168",
+    "lib_checksum": "e8a2123e378c9771890cfbe20856dfc5",
     "compiler_info": {
         "cc_version": "arm-none-eabi-gcc (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 14.2.1 20241119",
         "cflags": {
@@ -11,7 +11,7 @@
     },
     "use_case": "anomaly_detection",
     "data_info": {
-        "learning_sample_num": 64,
+        "learning_sample_num": 30,
         "n_samples": 128,
         "n_channels": 3,
         "label": [
@@ -24,21 +24,21 @@
         "chip": "MCXA156"
     },
     "memory_usage (Byte)": {
-        "flash": 11104,
-        "ram": 3692
+        "flash": 8984,
+        "ram": 8036
     },
     "model_info": {
-        "name": "IKM",
+        "name": "IPCA",
         "type": "CML",
         "task": "AD",
-        "description": "Incremental KMeans for anomaly detection",
+        "description": "Incremental PCA(Principal Component Analysis) for anomaly detection",
         "support_odl": true,
         "support_nodl": false,
         "enable": true
     },
     "benchmark": {
         "performance": {
-            "score": 0.9933885631036007,
+            "score": 0.9932940885143814,
             "threshold": 0.9,
             "balanced_accuracy": 1.0,
             "f1_score": 1.0,
@@ -47,15 +47,15 @@
                 1.0
             ],
             "roc_auc": 1.0,
-            "functional_margin": 0.999999959518544,
+            "functional_margin": 0.9814050862085403,
             "confusion_matrix": [
                 [
-                    667,
+                    840,
                     0
                 ],
                 [
                     0,
-                    260
+                    150
                 ]
             ],
             "confusion_matrix_true": [
@@ -81,12 +81,12 @@
             "learning_curve": [
                 [
                     0,
-                    64,
-                    533
+                    30,
+                    672
                 ],
                 [
                     0.5,
-                    0.9940029985007497,
+                    0.9910714285714286,
                     1.0
                 ]
             ]
@@ -98,10 +98,10 @@
             "value": 0
         },
         "estimated_memory_usage (Byte)": {
-            "RAM": 5320,
+            "RAM": 9596,
             "Heap": 0,
             "Model_Flash": 0,
-            "Algo_Flash": 5540
+            "Algo_Flash": 6324
         }
     }
 }
