@@ -35,20 +35,18 @@
 #include "queue.h"
 #include "event_groups.h"
 #include <stdio.h>
-#include "TimeSeries.h"
+
+//-----------------------------------------------------------------------
+// Time Series Studio model description
+//-----------------------------------------------------------------------
+#include "tss_app.h"
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-/*! @brief Model input window: 128 samples x 3 axes (X/Y/Z), as trained in Time Series
- *         Studio. The guard below stops a regenerated model from silently changing the
- *         window size out from under the acquisition code. */
-#if (TSS_INPUT_DATA_LEN != 128) || (TSS_INPUT_DATA_DIM != 3)
-#error "The anomaly model must use a 128-sample window with 3 channels (TSS_INPUT_DATA_LEN / TSS_INPUT_DATA_DIM)."
-#endif
-
-/*! @brief Number of floats in one model input window. */
-#define BUF_CNT (TSS_INPUT_DATA_LEN * TSS_INPUT_DATA_DIM)
+/*! @brief Model input window, in floats. tss_app.c validates at start-up that the
+ *         linked model really is built for this window (128 samples x 3 axes). */
+#define BUF_CNT (APP_TSS_WINDOW_FLOATS)
 
 /*! @brief Event bit signalling that the sensor raised its watermark interrupt. */
 #define EVENT_BIT_SENSOR_IRQ (1 << 0)
@@ -130,6 +128,13 @@ void sensor_task(void *param)
     uint32_t recv_cnt          = 0;
     uint8_t buf_idx            = 0;
 
+    /*! Refuse to run if the linked model does not match this pipeline's window. */
+    if (NULL == APP_TSS_Init())
+    {
+        PRINTF("TSS model unusable, acquisition stopped\r\n");
+        return;
+    }
+
     xEventGroup = xEventGroupCreate();
     if (xEventGroup == NULL)
     {
@@ -156,7 +161,7 @@ void sensor_task(void *param)
 
         /*! Drain at most as many samples as still fit in the current window. */
         {
-            uint32_t maxSamples = (BUF_CNT - recv_cnt) / TSS_INPUT_DATA_DIM;
+            uint32_t maxSamples = (BUF_CNT - recv_cnt) / APP_TSS_WINDOW_DIM;
 
             if (maxSamples > ACCEL_SENSOR_FIFO_DEPTH)
             {

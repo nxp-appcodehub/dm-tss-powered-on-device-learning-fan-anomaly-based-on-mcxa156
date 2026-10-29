@@ -24,7 +24,7 @@
  *    (see ::ACCEL_SENSOR_NORMALIZE_SCALE).
  *
  * The host side (source/sensor_task.c) groups the samples into the model input window:
- * 128 samples x 3 axes, as published by ::TSS_INPUT_DATA_LEN / ::TSS_INPUT_DATA_DIM.
+ * 128 samples x 3 axes (::APP_TSS_WINDOW_LEN / ::APP_TSS_WINDOW_DIM in source/tss_app.h).
  */
 
 #ifndef ACCEL_SENSOR_H_

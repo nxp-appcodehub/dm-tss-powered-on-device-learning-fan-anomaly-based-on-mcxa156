@@ -19,7 +19,7 @@
 
 #include "fsl_gpio.h"
 #include "fsl_port.h"
-#include "TimeSeries.h"
+#include "tss_app.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -175,6 +175,14 @@ int main(void)
     BOARD_InitBootClocks();
     BOARD_InitDebugConsole();
 
+    /*! Resolve the Time Series Studio model before anything is sized from it. */
+    if (NULL == APP_TSS_Init())
+    {
+        PRINTF("TSS model unusable, halting\r\n");
+        while (1)
+            ;
+    }
+
     stat = xTaskCreate(AppTask, "lvgl", configMINIMAL_STACK_SIZE + 800, NULL, tskIDLE_PRIORITY + 2, NULL);
 
     if (pdPASS != stat)
@@ -184,7 +192,7 @@ int main(void)
             ;
     }
 
-    QueueHandle_t NewSample = xQueueCreate(1, TSS_INPUT_DATA_LEN*TSS_INPUT_DATA_DIM*sizeof(float));
+    QueueHandle_t NewSample = xQueueCreate(1, APP_TSS_WINDOW_FLOATS*sizeof(float));
 
     stat = xTaskCreate(sensor_task, "sensor", configMINIMAL_STACK_SIZE + 200, NewSample, tskIDLE_PRIORITY +3, NULL);
 

@@ -144,6 +144,7 @@ void setup_scr_Main(lv_ui *ui)
 
     //Write codes Main_btn_Data_collect
     ui->Main_btn_Data_collect = lv_btn_create(ui->Main);
+#if 0    
     lv_obj_add_flag(ui->Main_btn_Data_collect, LV_OBJ_FLAG_CHECKABLE);
     ui->Main_btn_Data_collect_label = lv_label_create(ui->Main_btn_Data_collect);
     lv_label_set_text(ui->Main_btn_Data_collect_label, "Data Collect");
@@ -165,7 +166,7 @@ void setup_scr_Main(lv_ui *ui)
     lv_obj_set_style_text_font(ui->Main_btn_Data_collect, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->Main_btn_Data_collect, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->Main_btn_Data_collect, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-
+#endif
     //Write codes Main_label_1
     ui->Main_label_1 = lv_label_create(ui->Main);
     lv_label_set_text(ui->Main_label_1, "Anomaly Detect\n\nPowered by  \n\neIQ TSS");
