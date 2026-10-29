@@ -1,0 +1,110 @@
+/*
+ * BMI323 register definitions used by the Time Series Studio sensor HAL.
+ */
+
+#ifndef BMI323_REGDEF_H_
+#define BMI323_REGDEF_H_
+
+#include <stdint.h>
+
+#define BMI323_DEVICE_ADDRESS_SDO_GND        (0x68)
+#define BMI323_DEVICE_ADDRESS_SDO_VDDIO      (0x69)
+
+#define BMI323_CHIP_ID_VALUE                 (0x43)
+
+enum
+{
+    BMI323_CHIP_ID         = 0x00,
+    BMI323_ERR_REG         = 0x01,
+    BMI323_STATUS          = 0x02,
+    BMI323_ACC_DATA_X      = 0x03,
+    BMI323_ACC_DATA_Y      = 0x04,
+    BMI323_ACC_DATA_Z      = 0x05,
+    BMI323_INT_STATUS_INT1 = 0x0D,
+    BMI323_INT_STATUS_INT2 = 0x0E,
+    BMI323_FIFO_FILL_LEVEL = 0x15,
+    BMI323_FIFO_DATA       = 0x16,
+    BMI323_ACC_CONF        = 0x20,
+    BMI323_FIFO_WATERMARK  = 0x35,
+    BMI323_FIFO_CONF       = 0x36,
+    BMI323_FIFO_CTRL       = 0x37,
+    BMI323_IO_INT_CTRL     = 0x38,
+    BMI323_INT_CONF        = 0x39,
+    BMI323_INT_MAP2        = 0x3B,
+    BMI323_CMD             = 0x7E,
+};
+
+#define BMI323_CMD_SOFT_RESET                (0xDEAF)
+
+#define BMI323_STATUS_POR_DETECTED_MASK      (1U << 0)
+#define BMI323_STATUS_DRDY_TEMP_MASK         (1U << 5)
+#define BMI323_STATUS_DRDY_GYR_MASK          (1U << 6)
+#define BMI323_STATUS_DRDY_ACC_MASK          (1U << 7)
+
+#define BMI323_INT_STATUS_INT1_ACC_DRDY_MASK (1U << 13)
+#define BMI323_INT_STATUS_INT1_FIFO_WM_MASK  (1U << 14)
+
+#define BMI323_ACC_CONF_ODR_MASK             (0x000FU)
+#define BMI323_ACC_CONF_RANGE_MASK           (0x0070U)
+#define BMI323_ACC_CONF_BW_MASK              (0x0080U)
+#define BMI323_ACC_CONF_AVG_NUM_MASK         (0x0700U)
+#define BMI323_ACC_CONF_MODE_MASK            (0x7000U)
+
+#define BMI323_ACC_CONF_ODR_12P5HZ           (0x0005U)
+#define BMI323_ACC_CONF_ODR_25HZ             (0x0006U)
+#define BMI323_ACC_CONF_ODR_50HZ             (0x0007U)
+#define BMI323_ACC_CONF_ODR_100HZ            (0x0008U)
+#define BMI323_ACC_CONF_ODR_200HZ            (0x0009U)
+#define BMI323_ACC_CONF_ODR_400HZ            (0x000AU)
+#define BMI323_ACC_CONF_ODR_800HZ            (0x000BU)
+#define BMI323_ACC_CONF_ODR_1600HZ           (0x000CU)
+#define BMI323_ACC_CONF_ODR_3200HZ           (0x000DU)
+#define BMI323_ACC_CONF_ODR_6400HZ           (0x000EU)
+
+#define BMI323_ACC_CONF_RANGE_2G             (0x0000U)
+#define BMI323_ACC_CONF_RANGE_4G             (0x0010U)
+#define BMI323_ACC_CONF_RANGE_8G             (0x0020U)
+#define BMI323_ACC_CONF_RANGE_16G            (0x0030U)
+
+#define BMI323_ACC_CONF_BW_ODR_BY_2          (0x0000U)
+#define BMI323_ACC_CONF_BW_ODR_BY_4          (0x0080U)
+#define BMI323_ACC_CONF_AVG_4                (0x0200U)
+#define BMI323_ACC_CONF_MODE_DISABLE         (0x0000U)
+#define BMI323_ACC_CONF_MODE_NORMAL          (0x4000U)
+#define BMI323_ACC_CONF_MODE_HIGH_PERF       (0x7000U)
+
+#define BMI323_IO_INT_CTRL_INT1_LVL_LOW      (0x0000U)
+#define BMI323_IO_INT_CTRL_INT1_OD_PUSH_PULL (0x0000U)
+#define BMI323_IO_INT_CTRL_INT1_OD_OPEN_DRAIN (1U << 1)
+#define BMI323_IO_INT_CTRL_INT1_OUTPUT_EN    (1U << 2)
+#define BMI323_IO_INT_CTRL_INT2_LVL_LOW      (0x0000U)
+#define BMI323_IO_INT_CTRL_INT2_OD_PUSH_PULL (0x0000U)
+#define BMI323_IO_INT_CTRL_INT2_OD_OPEN_DRAIN (1U << 9)
+#define BMI323_IO_INT_CTRL_INT2_OUTPUT_EN    (1U << 10)
+
+#define BMI323_INT_CONF_NON_LATCHED          (0x0000U)
+#define BMI323_INT_CONF_LATCHED              (0x0001U)
+
+#define BMI323_INT_MAP_DISABLED              (0x0U)
+#define BMI323_INT_MAP_INT1                  (0x1U)
+#define BMI323_INT_MAP_INT2                  (0x2U)
+#define BMI323_INT_MAP_IBI                   (0x3U)
+#define BMI323_INT_MAP2_ACC_DRDY_SHIFT       (10U)
+#define BMI323_INT_MAP2_ACC_DRDY_INT1        (BMI323_INT_MAP_INT1 << BMI323_INT_MAP2_ACC_DRDY_SHIFT)
+#define BMI323_INT_MAP2_ACC_DRDY_INT2        (BMI323_INT_MAP_INT2 << BMI323_INT_MAP2_ACC_DRDY_SHIFT)
+#define BMI323_INT_MAP2_ACC_DRDY_MASK        (0x3U << BMI323_INT_MAP2_ACC_DRDY_SHIFT)
+#define BMI323_INT_MAP2_FIFO_WM_SHIFT        (12U)
+#define BMI323_INT_MAP2_FIFO_WM_INT1         (BMI323_INT_MAP_INT1 << BMI323_INT_MAP2_FIFO_WM_SHIFT)
+#define BMI323_INT_MAP2_FIFO_WM_INT2         (BMI323_INT_MAP_INT2 << BMI323_INT_MAP2_FIFO_WM_SHIFT)
+#define BMI323_INT_MAP2_FIFO_WM_MASK         (0x3U << BMI323_INT_MAP2_FIFO_WM_SHIFT)
+
+#define BMI323_FIFO_CONF_STOP_ON_FULL        (1U << 0)
+#define BMI323_FIFO_CONF_ACC_EN              (1U << 9)
+#define BMI323_FIFO_CTRL_FLUSH               (1U << 0)
+
+#define BMI323_SENSITIVITY_MG_PER_LSB_2G     (1000.0 / 16384)
+#define BMI323_SENSITIVITY_MG_PER_LSB_4G     (1000.0 / 8192)
+#define BMI323_SENSITIVITY_MG_PER_LSB_8G     (1000.0 / 4096)
+#define BMI323_SENSITIVITY_MG_PER_LSB_16G    (1000.0 / 2048)
+
+#endif /* BMI323_REGDEF_H_ */

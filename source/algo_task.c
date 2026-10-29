@@ -282,7 +282,7 @@ void app_algo_task(void* parameters)
 			}
 			else
 			{
-				PRINTF("predict %f, dur:%dms\r\n",score,xTaskGetTickCount()-tick_sm);
+				//PRINTF("predict %f, dur:%dms\r\n",score,xTaskGetTickCount()-tick_sm);
 				//report score
 				app_gui_update_score(score,attr->recommend_threshold);
 			}

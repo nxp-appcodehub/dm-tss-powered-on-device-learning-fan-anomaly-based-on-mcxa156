@@ -181,6 +181,7 @@ void sensor_task(void *param)
                 sensor_buf[buf_idx][recv_cnt++] = (float)sensor_samples[i].accel[0];
                 sensor_buf[buf_idx][recv_cnt++] = (float)sensor_samples[i].accel[1];
                 sensor_buf[buf_idx][recv_cnt++] = (float)sensor_samples[i].accel[2];
+                PRINTF("%.3f,%.3f,%.3f,",(float)sensor_samples[i].accel[0],(float)sensor_samples[i].accel[1],(float)sensor_samples[i].accel[2]);
             }
 
             if (recv_cnt == BUF_CNT)
