@@ -17,11 +17,14 @@
  *  - ::ACCEL_SENSOR_BMI323   : Bosch BMI323 on the 6DOF-IMU-20-CLICK board (I2C, 0x68)
  *
  * Both back-ends are configured for the same behaviour:
- *  - 400 Hz accelerometer ODR, +/-4 g full scale
+ *  - 400 Hz accelerometer ODR, +/-2 g full scale
  *  - FIFO buffering with a watermark interrupt on the mikroBUS INT pin
- *  - samples reported as int16 counts in the *FXLS8974 scale* (~512 LSB/g @ 4 g) so that
+ *  - samples reported as int16 counts in the *FXLS8974 scale* (~1024 LSB/g @ 2 g) so that
  *    a model trained with one sensor stays usable with the other
  *    (see ::ACCEL_SENSOR_NORMALIZE_SCALE).
+ *
+ * The host side (source/sensor_task.c) groups the samples into the model input window:
+ * 128 samples x 3 axes, as published by ::TSS_INPUT_DATA_LEN / ::TSS_INPUT_DATA_DIM.
  */
 
 #ifndef ACCEL_SENSOR_H_
@@ -50,7 +53,7 @@
 #error "ACCEL_SENSOR_SELECT must be ACCEL_SENSOR_FXLS8974 or ACCEL_SENSOR_BMI323"
 #endif
 
-/*! @brief When 1, raw counts are rescaled to the FXLS8974 4 g scale (~512 LSB/g).
+/*! @brief When 1, raw counts are rescaled to the FXLS8974 2 g scale (~1024 LSB/g).
  *
  *  This keeps the numeric range fed to the Time Series Studio model identical for both
  *  sensors, so a model trained on an FXLS8974 capture can be reused as-is. Set to 0 to
@@ -91,7 +94,7 @@ typedef struct
  ******************************************************************************/
 /*! @brief       Bring up the communication bus and the accelerometer.
  *  @details     Initializes the sensor board control pins, the I2C bus, probes the
- *               device ID and applies the application configuration (400 Hz, 4 g, FIFO
+ *               device ID and applies the application configuration (400 Hz, 2 g, FIFO
  *               watermark interrupt on the mikroBUS INT pin). After this call the sensor
  *               is active and starts filling its FIFO.
  *  @constraints Must be the first ACCEL_SENSOR API called.

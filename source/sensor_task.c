@@ -40,6 +40,13 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+/*! @brief Model input window: 128 samples x 3 axes (X/Y/Z), as trained in Time Series
+ *         Studio. The guard below stops a regenerated model from silently changing the
+ *         window size out from under the acquisition code. */
+#if (TSS_INPUT_DATA_LEN != 128) || (TSS_INPUT_DATA_DIM != 3)
+#error "The anomaly model must use a 128-sample window with 3 channels (TSS_INPUT_DATA_LEN / TSS_INPUT_DATA_DIM)."
+#endif
+
 /*! @brief Number of floats in one model input window. */
 #define BUF_CNT (TSS_INPUT_DATA_LEN * TSS_INPUT_DATA_DIM)
 

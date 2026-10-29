@@ -13,7 +13,7 @@
  * ACCEL_SENSOR_SELECT == ACCEL_SENSOR_BMI323.
  *
  * The accelerometer is configured exactly like the FXLS8974 back-end: 400 Hz ODR,
- * +/-4 g full scale, FIFO buffering and a watermark interrupt on the mikroBUS INT pin.
+ * +/-2 g full scale, FIFO buffering and a watermark interrupt on the mikroBUS INT pin.
  * Only the accelerometer is stored in the FIFO; the gyroscope stays powered down since
  * the application feeds three axes to the model.
  */
@@ -38,20 +38,20 @@ extern void BOARD_DELAY_ms(int ms);
  *  ::BMI323_FIFO_ACC_FRAME_WORDS words long. */
 #define BMI323_FIFO_WMRK_WORDS (ACCEL_SENSOR_FIFO_WMRK * BMI323_FIFO_ACC_FRAME_WORDS)
 
-/*! @brief Right shift that maps BMI323 4 g counts (8192 LSB/g) onto the FXLS8974
- *         4 g scale (512 LSB/g). The ratio is exactly 16, so a shift is lossless. */
+/*! @brief Right shift that maps BMI323 2 g counts (16384 LSB/g) onto the FXLS8974
+ *         2 g scale (1024 LSB/g). The ratio is exactly 16, so a shift is lossless. */
 #define BMI323_SCALE_SHIFT (4)
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-/*! @brief Application configuration: 4 g full scale, 400 Hz ODR, FIFO watermark IRQ
+/*! @brief Application configuration: 2 g full scale, 400 Hz ODR, FIFO watermark IRQ
  *         routed to INT2, which is the pin wired to mikroBUS INT on this click board. */
 static const bmi323_regwritelist_t cBmi323ConfigNormal[] = {
-    /*! Accelerometer: high performance mode, no averaging, ODR/2 bandwidth, 4 g, 400 Hz. */
+    /*! Accelerometer: high performance mode, no averaging, ODR/2 bandwidth, 2 g, 400 Hz. */
     {BMI323_ACC_CONF,
      BMI323_ACC_CONF_MODE_HIGH_PERF | BMI323_ACC_CONF_AVG_1 | BMI323_ACC_CONF_BW_ODR_2 |
-         BMI323_ACC_CONF_RANGE_4G | BMI323_ACC_CONF_ODR_400HZ,
+         BMI323_ACC_CONF_RANGE_2G | BMI323_ACC_CONF_ODR_400HZ,
      0x0000},
     /*! Gyroscope: not used by the application, keep it powered down. */
     {BMI323_GYR_CONF, BMI323_GYR_CONF_MODE_DISABLE, 0x0000},
@@ -121,7 +121,7 @@ static inline int16_t BMI323_Word(const uint8_t *pRaw)
 static inline int16_t BMI323_Rescale(int16_t raw)
 {
 #if (ACCEL_SENSOR_NORMALIZE_SCALE)
-    /*! Arithmetic shift: 8192 LSB/g (BMI323 @ 4 g) -> 512 LSB/g (FXLS8974 @ 4 g). */
+    /*! Arithmetic shift: 16384 LSB/g (BMI323 @ 2 g) -> 1024 LSB/g (FXLS8974 @ 2 g). */
     return (int16_t)(raw >> BMI323_SCALE_SHIFT);
 #else
     return raw;

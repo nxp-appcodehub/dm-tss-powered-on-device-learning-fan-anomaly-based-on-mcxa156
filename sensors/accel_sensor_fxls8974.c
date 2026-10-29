@@ -37,10 +37,10 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-/*! @brief Application configuration: 4 g full scale, 400 Hz ODR, FIFO watermark IRQ. */
+/*! @brief Application configuration: 2 g full scale, 400 Hz ODR, FIFO watermark IRQ. */
 static const registerwritelist_t cFxls8974ConfigNormal[] = {
-    /*! Set Full-scale range as 4G. */
-    {FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_FSR_4G, FXLS8974_SENS_CONFIG1_FSR_MASK},
+    /*! Set Full-scale range as 2G. */
+    {FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_FSR_2G, FXLS8974_SENS_CONFIG1_FSR_MASK},
     /*! Disable Self-Test. */
     {FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_ST_AXIS_SEL_DISABLED, FXLS8974_SENS_CONFIG1_ST_AXIS_SEL_MASK},
     /*! Set Wake Mode ODR Rate as 400Hz. */
@@ -221,7 +221,7 @@ int32_t ACCEL_SENSOR_ReadData(accel_sensor_data_t *pSamples, uint32_t maxSamples
     }
 
     /*! Assemble the little-endian 16-bit counts.
-     *  The FXLS8974 already reports ~512 LSB/g at 4 g, which is the reference scale,
+     *  The FXLS8974 already reports ~1024 LSB/g at 2 g, which is the reference scale,
      *  so no rescaling is needed here regardless of ACCEL_SENSOR_NORMALIZE_SCALE. */
     for (uint32_t i = 0; i < sampleCount; i++)
     {
