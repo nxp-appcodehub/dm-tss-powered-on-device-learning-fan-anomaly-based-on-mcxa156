@@ -1,18 +1,17 @@
 {
-    "date_created": "2025-01-13T08:16:03.098463",
-    "lib_id": "72568a617d6459",
-    "lib_checksum": "0062bd5e5d82f9a23e8bb1bc0aa7285c",
+    "date_created": "2026-10-29T06:57:00.854271",
+    "lib_checksum": "6bb0d38b93618a90fc9866ed7f19efb2",
     "compiler_info": {
-        "cc_version": "arm-none-eabi-gcc (15:10.3-2021.07-4) 10.3.1 20210621 (release)",
+        "cc_version": "arm-none-eabi-gcc (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 14.2.1 20241119",
         "cflags": {
             "mfloat-abi": "hard",
-            "fshort-enums": false,
+            "fshort-enums": true,
             "fshort-wchar": false
         }
     },
     "use_case": "anomaly_detection",
     "data_info": {
-        "learning_sample_num": 36,
+        "learning_sample_num": 64,
         "n_samples": 128,
         "n_channels": 3,
         "label": [
@@ -21,23 +20,25 @@
         ]
     },
     "platform_info": {
-        "library": true,
-        "emulator": false,
         "arch": "cortex-m33",
-        "chip": "MCXA153VLH"
+        "chip": "MCXA156"
     },
     "memory_usage (Byte)": {
-        "flash": 7559,
-        "ram": 4260
+        "flash": 11104,
+        "ram": 3692
     },
     "model_info": {
         "name": "IKM",
         "type": "CML",
-        "description": "Incremental KMeans for anomaly detection"
+        "task": "AD",
+        "description": "Incremental KMeans for anomaly detection",
+        "support_odl": true,
+        "support_nodl": false,
+        "enable": true
     },
     "benchmark": {
         "performance": {
-            "score": 0.9933885635658881,
+            "score": 0.9933885631036007,
             "threshold": 0.9,
             "balanced_accuracy": 1.0,
             "f1_score": 1.0,
@@ -46,15 +47,15 @@
                 1.0
             ],
             "roc_auc": 1.0,
-            "functional_margin": 0.999999999999713,
+            "functional_margin": 0.999999959518544,
             "confusion_matrix": [
                 [
-                    1050,
+                    667,
                     0
                 ],
                 [
                     0,
-                    300
+                    260
                 ]
             ],
             "confusion_matrix_true": [
@@ -80,40 +81,12 @@
             "learning_curve": [
                 [
                     0,
-                    12,
-                    24,
-                    36,
-                    48,
-                    60,
-                    72,
-                    84,
-                    96,
-                    108,
-                    120,
-                    240,
-                    360,
-                    480,
-                    600,
-                    720,
-                    840
+                    64,
+                    533
                 ],
                 [
                     0.5,
-                    0.5,
-                    0.5,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
+                    0.9940029985007497,
                     1.0
                 ]
             ]
@@ -125,10 +98,10 @@
             "value": 0
         },
         "estimated_memory_usage (Byte)": {
-            "RAM": 4264,
+            "RAM": 5320,
             "Heap": 0,
             "Model_Flash": 0,
-            "Algo_Flash": 5924
+            "Algo_Flash": 5540
         }
     }
 }
