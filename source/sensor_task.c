@@ -193,10 +193,11 @@ void sensor_task(void *param)
         }
         else
         {
+            /*! Same textual format as the TSS datalogger: mg with three decimals. */
             for (uint32_t i = 0; i < numSamples; i++)
             {
-                PRINTF("%d %d %d\r\n", sensor_samples[i].accel[0], sensor_samples[i].accel[1],
-                       sensor_samples[i].accel[2]);
+                PRINTF("%.3f %.3f %.3f\r\n", (double)sensor_samples[i].accel[0],
+                       (double)sensor_samples[i].accel[1], (double)sensor_samples[i].accel[2]);
             }
         }
     }

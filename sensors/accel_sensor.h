@@ -19,9 +19,12 @@
  * Both back-ends are configured for the same behaviour:
  *  - 400 Hz accelerometer ODR, +/-2 g full scale
  *  - FIFO buffering with a watermark interrupt on the mikroBUS INT pin
- *  - samples reported as int16 counts in the *FXLS8974 scale* (~1024 LSB/g @ 2 g) so that
- *    a model trained with one sensor stays usable with the other
- *    (see ::ACCEL_SENSOR_NORMALIZE_SCALE).
+ *  - samples reported in **milli-g (mg)**, the unit the Time Series Studio datalogger
+ *    publishes and therefore the unit the anomaly model was trained on:
+ *    FXLS8974 raw counts x 1000/1024, BMI323 raw counts x 1000/16384 (both at 2 g).
+ *  - BMI323 front-end filtering matches the datalogger as well (normal mode,
+ *    ODR/4 bandwidth, 4-sample averaging), so both sensors feed the model the same
+ *    signal content, not only the same numeric scale.
  *
  * The host side (source/sensor_task.c) groups the samples into the model input window:
  * 128 samples x 3 axes (::APP_TSS_WINDOW_LEN / ::APP_TSS_WINDOW_DIM in source/tss_app.h).
@@ -53,16 +56,6 @@
 #error "ACCEL_SENSOR_SELECT must be ACCEL_SENSOR_FXLS8974 or ACCEL_SENSOR_BMI323"
 #endif
 
-/*! @brief When 1, raw counts are rescaled to the FXLS8974 2 g scale (~1024 LSB/g).
- *
- *  This keeps the numeric range fed to the Time Series Studio model identical for both
- *  sensors, so a model trained on an FXLS8974 capture can be reused as-is. Set to 0 to
- *  feed the sensor's native counts instead (requires re-training the model).
- */
-#ifndef ACCEL_SENSOR_NORMALIZE_SCALE
-#define ACCEL_SENSOR_NORMALIZE_SCALE (1)
-#endif
-
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -86,7 +79,7 @@
 /*! @brief One accelerometer sample. */
 typedef struct
 {
-    int16_t accel[3]; /*!< X, Y, Z acceleration counts. */
+    float accel[3]; /*!< X, Y, Z acceleration in milli-g (mg), as published by the TSS datalogger. */
 } accel_sensor_data_t;
 
 /*******************************************************************************
@@ -121,7 +114,7 @@ int32_t ACCEL_SENSOR_GetWhoAmI(uint8_t *pWhoAmI);
 /*! @brief       Drain the pending accelerometer samples from the sensor FIFO.
  *  @details     Reads however many complete samples the FIFO currently holds, up to
  *               @p maxSamples. Returns ::SENSOR_ERROR_NONE with @p *pNumSamples == 0 when
- *               the FIFO is empty. Samples are scaled per ::ACCEL_SENSOR_NORMALIZE_SCALE.
+ *               the FIFO is empty. Samples are reported in milli-g (mg).
  *  @param[out]  pSamples     buffer receiving the samples, at least @p maxSamples entries.
  *  @param[in]   maxSamples   capacity of @p pSamples, in samples.
  *  @param[out]  pNumSamples  receives the number of samples actually written.

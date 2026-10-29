@@ -38,9 +38,12 @@ extern void BOARD_DELAY_ms(int ms);
  *  ::BMI323_FIFO_ACC_FRAME_WORDS words long. */
 #define BMI323_FIFO_WMRK_WORDS (ACCEL_SENSOR_FIFO_WMRK * BMI323_FIFO_ACC_FRAME_WORDS)
 
-/*! @brief Right shift that maps BMI323 2 g counts (16384 LSB/g) onto the FXLS8974
- *         2 g scale (1024 LSB/g). The ratio is exactly 16, so a shift is lossless. */
-#define BMI323_SCALE_SHIFT (4)
+/*! @brief Milli-g per LSB at the configured 2 g range.
+ *
+ *  The BMI323 reports 16384 LSB/g at +/-2 g (::BMI323_ACC_SENS_2G), so one count is
+ *  1000/16384 = 0.061 mg. This is the same conversion the Time Series Studio datalogger
+ *  applies, which keeps the firmware input in the unit the model was trained on. */
+#define BMI323_MG_PER_LSB (1000.0f / (float)BMI323_ACC_SENS_2G)
 
 /*******************************************************************************
  * Variables
@@ -48,9 +51,11 @@ extern void BOARD_DELAY_ms(int ms);
 /*! @brief Application configuration: 2 g full scale, 400 Hz ODR, FIFO watermark IRQ
  *         routed to INT2, which is the pin wired to mikroBUS INT on this click board. */
 static const bmi323_regwritelist_t cBmi323ConfigNormal[] = {
-    /*! Accelerometer: high performance mode, no averaging, ODR/2 bandwidth, 2 g, 400 Hz. */
+    /*! Accelerometer: normal mode, 4-sample averaging, ODR/4 bandwidth, 2 g, 400 Hz.
+     *  Mode/bandwidth/averaging mirror the TSS datalogger so that the spectral content
+     *  fed to the model matches the data it was trained on. */
     {BMI323_ACC_CONF,
-     BMI323_ACC_CONF_MODE_HIGH_PERF | BMI323_ACC_CONF_AVG_1 | BMI323_ACC_CONF_BW_ODR_2 |
+     BMI323_ACC_CONF_MODE_CONTINUOUS | BMI323_ACC_CONF_AVG_4 | BMI323_ACC_CONF_BW_ODR_4 |
          BMI323_ACC_CONF_RANGE_2G | BMI323_ACC_CONF_ODR_400HZ,
      0x0000},
     /*! Gyroscope: not used by the application, keep it powered down. */
@@ -117,15 +122,10 @@ static inline int16_t BMI323_Word(const uint8_t *pRaw)
     return (int16_t)(((uint16_t)pRaw[1] << 8) | pRaw[0]);
 }
 
-/*! @brief Bring the raw count onto the scale the application expects. */
-static inline int16_t BMI323_Rescale(int16_t raw)
+/*! @brief Convert one raw count to milli-g, the unit the TSS model expects. */
+static inline float BMI323_ToMilliG(int16_t raw)
 {
-#if (ACCEL_SENSOR_NORMALIZE_SCALE)
-    /*! Arithmetic shift: 16384 LSB/g (BMI323 @ 2 g) -> 1024 LSB/g (FXLS8974 @ 2 g). */
-    return (int16_t)(raw >> BMI323_SCALE_SHIFT);
-#else
-    return raw;
-#endif
+    return (float)raw * BMI323_MG_PER_LSB;
 }
 
 /*******************************************************************************
@@ -276,9 +276,9 @@ int32_t ACCEL_SENSOR_ReadData(accel_sensor_data_t *pSamples, uint32_t maxSamples
             continue;
         }
 
-        pSamples[outCount].accel[0] = BMI323_Rescale(x);
-        pSamples[outCount].accel[1] = BMI323_Rescale(y);
-        pSamples[outCount].accel[2] = BMI323_Rescale(z);
+        pSamples[outCount].accel[0] = BMI323_ToMilliG(x);
+        pSamples[outCount].accel[1] = BMI323_ToMilliG(y);
+        pSamples[outCount].accel[2] = BMI323_ToMilliG(z);
         outCount++;
     }
 

@@ -28,6 +28,15 @@
 /*! @brief Bytes per accelerometer sample in the FIFO (X/Y/Z, 16-bit little endian). */
 #define FXLS8974_SAMPLE_SIZE (6U)
 
+/*! @brief Accelerometer sensitivity at the configured 2 g range, in LSB/g. */
+#define FXLS8974_SENS_2G_LSB_PER_G (1024.0f)
+
+/*! @brief Milli-g per LSB at 2 g (1000/1024 = 0.977 mg).
+ *
+ *  The TSS datalogger publishes mg as well, so converting here keeps the firmware input
+ *  in the unit the model was trained on. */
+#define FXLS8974_MG_PER_LSB (1000.0f / FXLS8974_SENS_2G_LSB_PER_G)
+
 /* INTF_SEL / BT_MODE pins that select the FXLS8974 I2C interface on FRDM-MCXA156. */
 #define FXLS8974_INTF_SEL_PORT GPIO1
 #define FXLS8974_INTF_SEL_PIN  21U
@@ -220,16 +229,17 @@ int32_t ACCEL_SENSOR_ReadData(accel_sensor_data_t *pSamples, uint32_t maxSamples
         return status;
     }
 
-    /*! Assemble the little-endian 16-bit counts.
-     *  The FXLS8974 already reports ~1024 LSB/g at 2 g, which is the reference scale,
-     *  so no rescaling is needed here regardless of ACCEL_SENSOR_NORMALIZE_SCALE. */
+    /*! Assemble the little-endian 16-bit counts and convert them to milli-g. */
     for (uint32_t i = 0; i < sampleCount; i++)
     {
         const uint8_t *pRaw = &g_fifoBuffer[i * FXLS8974_SAMPLE_SIZE];
+        int16_t x           = (int16_t)(((uint16_t)pRaw[1] << 8) | pRaw[0]);
+        int16_t y           = (int16_t)(((uint16_t)pRaw[3] << 8) | pRaw[2]);
+        int16_t z           = (int16_t)(((uint16_t)pRaw[5] << 8) | pRaw[4]);
 
-        pSamples[i].accel[0] = (int16_t)(((uint16_t)pRaw[1] << 8) | pRaw[0]);
-        pSamples[i].accel[1] = (int16_t)(((uint16_t)pRaw[3] << 8) | pRaw[2]);
-        pSamples[i].accel[2] = (int16_t)(((uint16_t)pRaw[5] << 8) | pRaw[4]);
+        pSamples[i].accel[0] = (float)x * FXLS8974_MG_PER_LSB;
+        pSamples[i].accel[1] = (float)y * FXLS8974_MG_PER_LSB;
+        pSamples[i].accel[2] = (float)z * FXLS8974_MG_PER_LSB;
     }
 
     *pNumSamples = sampleCount;
