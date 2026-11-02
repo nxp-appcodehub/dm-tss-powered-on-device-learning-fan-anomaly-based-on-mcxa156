@@ -849,7 +849,7 @@
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_FRDM-MCXA156</sdkName>
 		<sdkExample>frdmmcxa156_lvgl_guider</sdkExample>
-		<sdkVersion>25.03.00</sdkVersion>
+		<sdkVersion>26.03.00</sdkVersion>
 		<sdkComponents>platform.drivers.flexio.MCXA156;platform.drivers.flexio_mculcd.MCXA156;platform.drivers.flexio_mculcd_edma.MCXA156;driver.dbi_flexio_edma.MCXA156;platform.drivers.gpio.MCXA156;platform.drivers.lpi2c.MCXA156;middleware.freertos-kernel.cm33_non_trustzone.MCXA156;platform.drivers.inputmux.MCXA156;platform.drivers.inputmux_connections.MCXA156;driver.st7796s.MCXA156;driver.gt911.MCXA156;platform.drivers.edma_soc.MCXA156;platform.drivers.edma4.MCXA156;middleware.freertos-kernel.heap_4.MCXA156;platform.drivers.common.MCXA156;platform.drivers.clock.MCXA156;middleware.lvgl.MCXA156;platform.drivers.reset.MCXA156;platform.drivers.lpuart.MCXA156;platform.drivers.port.MCXA156;component.lpuart_adapter.MCXA156;component.lists.MCXA156;platform.utilities.misc_utilities.MCXA156;device.MCXA156_CMSIS.MCXA156;device.MCXA156_startup.MCXA156;utility.debug_console_lite.MCXA156;platform.utilities.assert_lite.MCXA156;driver.dbi.MCXA156;middleware.freertos-kernel.MCXA156;middleware.freertos-kernel.template.MCXA156;middleware.freertos-kernel.extension.MCXA156;platform.drivers.mcx_spc.MCXA156;middleware.lvgl.template.MCXA156;CMSIS_Include_core_cm.MCXA156;device.MCXA156_system.MCXA156;utility.str.MCXA156;frdmmcxa156_lvgl_guider;</sdkComponents>
 		<boardId>frdmmcxa156</boardId>
 		<package>MCXA156VLL</package>

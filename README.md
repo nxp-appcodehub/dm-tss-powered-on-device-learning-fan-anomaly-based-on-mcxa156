@@ -1,4 +1,5 @@
 # NXP Application Code Hub
+
 [<img src="https://mcuxpresso.nxp.com/static/icon/nxp-logo-color.svg" width="100"/>](https://www.nxp.com)
 
 ## Time Series Studio powered, on-device learning Fan anomaly detection based on FRDM-MCXA156
@@ -16,16 +17,18 @@ Below charts are the block of system and software workflow.
 
 ![](image/system_overview.jpg)
 
-
 ![](image/software_flow.jpg)
 
-
 #### Boards: FRDM-MCXA156
+
 #### Categories: AI/ML, Anomaly Detection
+
 #### Peripherals: DISPLAY, I2C
+
 #### Toolchains: MCUXpresso IDE
 
 ## Table of Contents
+
 1. [Software](#step1)
 2. [Hardware](#step2)
 3. [Setup](#step3)
@@ -41,86 +44,94 @@ Below charts are the block of system and software workflow.
 - MCUXpresso for Visual Studio Code: This example supports MCUXpresso for Visual Studio Code, for more information about how to use Visual Studio Code please refer [here](https://www.nxp.com/design/training/getting-started-with-mcuxpresso-for-visual-studio-code:TIP-GETTING-STARTED-WITH-MCUXPRESSO-FOR-VS-CODE).
 - Download and install [eIQ Toolkit 1.13.1](https://www.nxp.com/design/design-center/software/eiq-ml-development-environment/eiq-toolkit-for-end-to-end-model-development-and-deployment:EIQ-TOOLKIT#downloads)
 
-
 ## 2. Hardware<a name="step2"></a>
 
 - [FRDM-MCXA156](https://www.nxp.com/part/FRDM-MCXA156)
 - [PAR-LCD-S035](https://www.nxp.com/design/design-center/development-boards-and-designs/general-purpose-mcus/3-5-480x320-ips-tft-lcd-module:LCD-PAR-S035)
-- [ACCEL-4-CLICK](https://www.mikroe.com/accel-4-click)
+- [6DOF-IMU-20-Click](https://www.mikroe.com/6dof-imu-20-click)
+- or [ACCEL-4-CLICK](https://www.mikroe.com/accel-4-click)
 - FAN
 - Type-C USB cable
-
 
 ## 3. Setup<a name="step3"></a>
 
 ### 3.1 Step 1
 
 - Connect board with LCD
- 
+  
   ![](image/lcd_connect.jpg)
 
-- Mounting ACCEL-4-CLICK to the FAN
- 
+- Mounting 6DOF-IMU-20-Click (ACCEL-4-CLICK) to the FAN
+  
   ![](image/fan.jpg)
 
 - Connect board with ACCEL-4-CLICK
- 
+  
   ![](image/sensor_connect.jpg)
 
 - Connect debug port
- 
+  
   ![](image/debug.jpg)
 
 - whole system
- 
+  
   ![](image/system.jpg)
-
 
 ### 3.2 Step 2
 
 Import "dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" from Application Code Hub
 
 - Import project in MCUXpresso IDE
- 
+  
   ![](image/mcux%20_import_project.png)
 
 - Import project in VS code
- 
+  
   ![](image/vs_import_project.png)
+
+- Select IMU model in accel_sensor.h
+  
+  `#ifndef ACCEL_SENSOR_SELECT`
+  
+  `#define ACCEL_SENSOR_SELECT ACCEL_SENSOR_BMI323`
+  
+  `#endif`
+  
+  
 
 - Build project and download to the board  
 
 - **Notice: please erase the whole flash before download the firmware**
 
 ## 4. Results<a name="step4"></a>
+
 - Turn on the Fan, then normal state is detected,Switch the speed of Fan, the state of Fan remain normal
- 
+  
   ![](image/normal.jpg)
 
 - Knock on the Fan than anomaly is detected
- 
+  
   ![](image/anormaly1.jpg)
 
 - Disrupting the operation of the Fan blades, anomaly is detected
- 
+  
   ![](image/anomaly2.jpg)
 
 - Modify the mounting angle of ACCEL-4-CLICK by rotating it 90 degrees in the counterclockwise direction. An anomaly has been detected.
- 
+  
   ![](image/anormaly3.jpg)
 
+### Training on Device
 
- ### Training on Device
- - Enter Trainer window, click start button ensure that don’t move the Fan during the training procedure
+- Enter Trainer window, click start button ensure that don’t move the Fan during the training procedure
   
-   ![](image/trainer.jpg)
+  ![](image/trainer.jpg)
 
- - Return to main after training is complete
- 
-   ![](image/trained_result.jpg)
+- Return to main after training is complete
+  
+  ![](image/trained_result.jpg)
 
- - If the model fails to accurately recognize other speeds, then conduct the training once more.
- 
+- If the model fails to accurately recognize other speeds, then conduct the training once more.
 
 ## 5. FAQs<a name="step5"></a>
 
@@ -129,22 +140,26 @@ Import "dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" from App
 #### Project Metadata
 
 <!----- Boards ----->
+
 [![Board badge](https://img.shields.io/badge/Board-FRDM&ndash;MCXA156-blue)]()
 
 <!----- Categories ----->
+
 [![Category badge](https://img.shields.io/badge/Category-AI/ML-yellowgreen)](https://github.com/search?q=org%3Anxp-appcodehub+aiml+in%3Areadme&type=Repositories)
 [![Category badge](https://img.shields.io/badge/Category-ANOMALY%20DETECTION-yellowgreen)](https://github.com/search?q=org%3Anxp-appcodehub+anomaly_detection+in%3Areadme&type=Repositories)
 
 <!----- Peripherals ----->
+
 [![Peripheral badge](https://img.shields.io/badge/Peripheral-DISPLAY-yellow)](https://github.com/search?q=org%3Anxp-appcodehub+display+in%3Areadme&type=Repositories)
 [![Peripheral badge](https://img.shields.io/badge/Peripheral-I2C-yellow)](https://github.com/search?q=org%3Anxp-appcodehub+i2c+in%3Areadme&type=Repositories)
 
 <!----- Toolchains ----->
+
 [![Toolchain badge](https://img.shields.io/badge/Toolchain-MCUXPRESSO%20IDE-orange)](https://github.com/search?q=org%3Anxp-appcodehub+mcux+in%3Areadme&type=Repositories)
 
 Questions regarding the content/correctness of this example can be entered as Issues within this GitHub repository.
 
->**Warning**: For more general technical questions regarding NXP Microcontrollers and the difference in expected functionality, enter your questions on the [NXP Community Forum](https://community.nxp.com/)
+> **Warning**: For more general technical questions regarding NXP Microcontrollers and the difference in expected functionality, enter your questions on the [NXP Community Forum](https://community.nxp.com/)
 
 [![Follow us on Youtube](https://img.shields.io/badge/Youtube-Follow%20us%20on%20Youtube-red.svg)](https://www.youtube.com/NXP_Semiconductors)
 [![Follow us on LinkedIn](https://img.shields.io/badge/LinkedIn-Follow%20us%20on%20LinkedIn-blue.svg)](https://www.linkedin.com/company/nxp-semiconductors)
@@ -152,10 +167,13 @@ Questions regarding the content/correctness of this example can be entered as Is
 [![Follow us on Twitter](https://img.shields.io/badge/X-Follow%20us%20on%20X-black.svg)](https://x.com/NXP)
 
 ## 7. Release Notes<a name="step7"></a>
-| Version | Description / Update                           | Date                        |
-|:-------:|------------------------------------------------|----------------------------:|
-| 1.0     | Initial release on Application Code Hub        | November 27<sup>th</sup> 2024 |
-| 1.1     | Update to V1.1        						   | August 18<sup>th</sup> 2025 |
+
+| Version | Description / Update                    | Date                          |
+|:-------:| --------------------------------------- | -----------------------------:|
+| 1.0     | Initial release on Application Code Hub | November 27<sup>th</sup> 2024 |
+| 1.1     | Update to V1.1                          | August 18<sup>th</sup> 2025   |
+| 1.2     | Update to V1.2                          | November 2<sup>th</sup> 2026   |
+
 ## Licensing
 
 LA_OPT_NXP_Software_License v58
