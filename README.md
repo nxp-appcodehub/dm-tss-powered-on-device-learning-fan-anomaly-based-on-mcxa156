@@ -89,15 +89,22 @@ Import "dm-tss-powered-on-device-learning-fan-anomaly-based-on-mcxa156" from App
   
   ![](image/vs_import_project.png)
 
-- Select IMU model in accel_sensor.h
-  
-  `#ifndef ACCEL_SENSOR_SELECT`
-  
-  `#define ACCEL_SENSOR_SELECT ACCEL_SENSOR_BMI323`
-  
-  `#endif`
-  
-  
+- Select IMU sensor in accel_sensor.h
+
+    /*! @brief Selector value for the FXLS8974CF (ACCEL-4-CLICK). */
+    
+    #define ACCEL_SENSOR_FXLS8974 (1)
+
+    /*! @brief Selector value for the Bosch BMI323 (6DOF-IMU-20-CLICK). */
+
+    #define ACCEL_SENSOR_BMI323 (2)
+
+    #ifndef ACCEL_SENSOR_SELECT
+
+    #define ACCEL_SENSOR_SELECT ACCEL_SENSOR_BMI323
+
+    #endif
+
 
 - Build project and download to the board  
 
@@ -172,7 +179,7 @@ Questions regarding the content/correctness of this example can be entered as Is
 |:-------:| --------------------------------------- | -----------------------------:|
 | 1.0     | Initial release on Application Code Hub | November 27<sup>th</sup> 2024 |
 | 1.1     | Update to V1.1                          | August 18<sup>th</sup> 2025   |
-| 1.2     | Update to V1.2                          | November 2<sup>th</sup> 2026   |
+| 1.2     | Update to V1.2                          | November 2<sup>th</sup> 2026  |
 
 ## Licensing
 
