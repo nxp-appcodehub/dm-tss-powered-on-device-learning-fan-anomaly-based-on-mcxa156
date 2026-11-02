@@ -144,6 +144,7 @@ void setup_scr_Main(lv_ui *ui)
 
     //Write codes Main_btn_Data_collect
     ui->Main_btn_Data_collect = lv_btn_create(ui->Main);
+
     lv_obj_add_flag(ui->Main_btn_Data_collect, LV_OBJ_FLAG_CHECKABLE);
     ui->Main_btn_Data_collect_label = lv_label_create(ui->Main_btn_Data_collect);
     lv_label_set_text(ui->Main_btn_Data_collect_label, "Data Collect");

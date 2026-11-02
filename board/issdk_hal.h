@@ -21,7 +21,17 @@
 #include "fsl_lpuart_cmsis.h"
 
 
-#include "a8974_click.h" //Include appropriate sensor shield board header file
+/* Include the sensor shield board header file matching the selected sensor.
+ * ACCEL_SENSOR_SELECT lives in sensors/accel_sensor.h and defaults there, so the two
+ * shield headers (which both define SHIELD_NAME) are never pulled in together. */
+#include "accel_sensor.h"
+
+#if (ACCEL_SENSOR_SELECT == ACCEL_SENSOR_BMI323)
+#include "c6dofimu20_click.h" //6DOF IMU 20 Click (BMI323) shield board header file
+#else
+#include "a8974_click.h"      //ACCEL 4 Click (FXLS8974CF) shield board header file
+#endif
+
 #include "frdmmcxa156.h"
 // Pin mapping and driver information for default I2C brought to shield
 // By default, we use I2C_S1 defined in the lpc55s16.h file.

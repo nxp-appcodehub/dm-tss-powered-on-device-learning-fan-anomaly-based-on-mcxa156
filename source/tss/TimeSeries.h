@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-2025 NXP
+ * Copyright 2024-2026 NXP
  * NXP Proprietary. This software is owned or controlled by NXP and may only be used
  * strictly in accordance with the applicable license terms. By expressly accepting such terms or by
  * downloading, installing, activating and/or otherwise using the software, you are agreeing that you
@@ -15,21 +15,6 @@
 
 #ifndef _TIMESERIES_H_
 #define _TIMESERIES_H_
-
-#define ANOMALY_DETECTION_LIB_ID "72568a617d6459"
-
-#define TSS_INPUT_DATA_LEN                           (128)
-#define TSS_INPUT_DATA_DIM                           (3)
-
-#define USE_ANOMALY_DETECTION
-
-#define TSS_RECOMMEND_THRESHOLD                      (0.90f)
-
-#define SUPPORT_ODL          /* Support On Device Learning */
-
-#define MODEL_SIZE                                   (75)
-
-#define TSS_RECOMMEND_LEARNING_SAMPLE_NUM            (36)
 
 /* Error status returned functions in the Time Series Studio library */
 typedef enum
@@ -47,56 +32,188 @@ typedef enum
     TSS_UNKNOWN_ERROR           = 10, /* Unknown error */
 } tss_status;
 
-#ifdef __cplusplus
+typedef enum {
+    TASK_AD = 1,
+    TASK_AD_ODL = 2,
+    TASK_CLS = 3,
+    TASK_OC = 4,
+    TASK_REG = 5,
+    TASK_FC = 6,
+} task_type_t;
+
+typedef struct {
+    unsigned int data_len;
+    unsigned int data_dim;
+    unsigned int model_size;
+    const float *model_addr;
+    unsigned int target_num;
+    float recommend_threshold;
+    const char *lib_id;
+    const char *neutron_version;
+    unsigned int recommend_learning_num;
+    unsigned char odl_supported;
+    unsigned char neutron_enabled;
+    unsigned char powerquad_enabled;
+    unsigned char recursive_predicted;
+    unsigned int recursive_length;
+    unsigned int forecast_horizon_number;
+    const unsigned int *forecast_horizons;
+    unsigned int forecast_channel_number;
+    const unsigned int *forecast_channels;
+    float fbeta_beta;
+    unsigned int fbeta_label_id;
+} tss_algo_attribute_t;
+
+typedef struct tss_ad_task_ops
+{
+    /**
+     * @brief      Initialize the anomaly detection algorithm.
+     * @retval     TSS_SUCCESS              - Initialization succeed.
+     */
+    tss_status (*init)(void);
+
+    /**
+     * @brief      Predict the normal probability of the specified data.
+     * @param[in]  data_input               - The data input for the prediction.
+     * @param[out] probability              - The predicted probability output.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     * @retval     TSS_PREDICT_NOT_ENABLED  - Model not ready for prediction.
+     */
+    tss_status (*predict)(const float data_input[], float *probability);
+} tss_ad_task_ops_t;
+
+typedef struct tss_ad_odl_task_ops
+{
+   /**
+    * @brief      Initialize the anomaly detection algorithm with the specified model.
+    * @param[in]  model_buffer             - The model buffer for initialization, NULL means reset the model.
+    * @retval     TSS_SUCCESS              - Initialization succeed.
+    */
+    tss_status (*init)(const float model_buffer[]);
+
+    /**
+     * @brief      Learn new model from the normal data.
+     * @param[in]  data_input               - The data input for the learning.
+     * @retval     TSS_SUCCESS              - Learning succeed
+     * @retval     TSS_LEARNING_NOT_ENOUGH  - More data needed for the learning.
+     */
+    tss_status (*learn)(const float data_input[]);
+
+    /**
+     * @brief      Export the model to the specified buffer.
+     * @param[out] model_buffer             - The exported model buffer.
+     * @retval     TSS_SUCCESS              - Export succeed.
+     * @retval     TSS_PREDICT_NOT_ENABLED  - Model not ready for export.
+     */
+    tss_status (*export_model)(float model_buffer[]);
+
+    /**
+     * @brief      Predict the normal probability of the specified data.
+     * @param[in]  data_input               - The data input for the prediction.
+     * @param[out] probability              - The predicted probability output.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     * @retval     TSS_PREDICT_NOT_ENABLED  - Model not ready for prediction.
+     */
+    tss_status (*predict)(const float data_input[], float *probability);
+} tss_ad_odl_task_ops_t;
+
+typedef struct tss_cls_task_ops
+{
+    /**
+     * @brief      Initialize the classification algorithm.
+     * @retval     TSS_SUCCESS              - Initialization succeed.
+     */
+    tss_status (*init)(void);
+
+    /**
+     * @brief      Predict the probabilities and class index of the specified data.
+     * @param[in]  data_input               - The data input for the prediction.
+     * @param[out] probabilities            - The predicted probabilities of all classes
+     * @param[out] class_index              - The predicted class index.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     */
+    tss_status (*predict)(const float data_input[], float probabilities[], int *class_index);
+} tss_cls_task_ops_t;
+
+
+
+typedef struct tss_oc_task_ops
+{
+    /**
+     * @brief      Initialize the one class algorithm.
+     * @retval     TSS_SUCCESS              - Initialization succeed.
+     */
+    tss_status (*init)(void);
+
+    /**
+     * @brief      Predict if is outlier and the decision score of the specified data.
+     * @param[in]  data_input               - The data input for the prediction.
+     * @param[out] is_outlier               - The predicted results of if input is outlier.
+     * @param[out] score                    - The predicted score.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     */
+    tss_status (*predict)(const float data_input[], float *score, int *is_outlier);
+} tss_oc_task_ops_t;
+
+typedef struct tss_reg_task_ops
+{
+    /**
+     * @brief      Initialize the regression algorithm.
+     * @retval     TSS_SUCCESS              - Initialization succeed.
+     */
+    tss_status (*init)(void);
+
+    /**
+     * @brief      Predict the targets based on the specified data.
+     * @param[in]  data_input               - The data input for the prediction.
+     * @param[out] targets                  - The predicted targets output.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     */
+    tss_status (*predict)(const float data_input[], float targets[]);
+
+} tss_reg_task_ops_t;
+
+typedef struct tss_fc_task_ops
+{
+    /**
+     * @brief      Initialize the forecasting algorithm.
+     * @retval     TSS_SUCCESS              - Initialization succeed.
+     */
+    tss_status (*init)(void);
+
+    /**
+     * @brief      forecast the targets based on the specified data.
+     * @param[in]  data_input               - The data input for the forecasting.
+     * @param[out] forecasts                - The forecasted output.
+     * @retval     TSS_SUCCESS              - Prediction succeed.
+     */
+    tss_status (*predict)(const float data_input[], float forecasts[]);
+
+} tss_fc_task_ops_t;
+
+typedef struct tss_task_ops
+{
+    int task;
+    union
+    {
+        tss_ad_task_ops_t ad_ops;
+        tss_ad_odl_task_ops_t ad_odl_ops;
+        tss_cls_task_ops_t cls_ops;
+        tss_oc_task_ops_t oc_ops;
+        tss_reg_task_ops_t reg_ops;
+        tss_fc_task_ops_t fc_ops;
+    };
+    const tss_algo_attribute_t *(*algo_attribute)(void);
+
+} tss_task_ops_t;
+
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
-static const float model_buffer[MODEL_SIZE] = {
-    840.00000000f, 851.51751944f, 1199.89704158f, 522.41614799f, 511.50576793f, 487.50513627f, 485.88442305f, 471.91437796f,
-    445.36728165f, 755.56524317f, 736.06793994f, 705.68566513f, 55748.90609086f, 59438.34701123f, 42496.02961491f, 58924.60206227f,
-    62332.40540488f, 51611.82059051f, 56999.00245200f, 59865.69160935f, 56112.42148776f, 336.45395696f, 316.44114496f, 309.29947121f,
-    328.68002237f, 308.27950022f, 291.27258274f, 621.97711903f, 590.91020935f, 618.57572061f, 913.00854387f, 922.15685932f,
-    785.23705964f, 982.96008181f, 1141.06060657f, 1024.99594006f, 1124.89028796f, 1129.77346669f, 1141.01373166f, 802.72924793f,
-    728.88665761f, 700.40621938f, 676.55047597f, 664.43377676f, 604.70172110f, 994.97119126f, 1017.32373032f, 924.30880723f,
-    796.08581527f, 880.35375959f, 813.00415023f, 857.69982893f, 824.07019026f, 857.75067122f, 853.22692854f, 672.42999254f,
-    729.99310288f, 745.29691352f, 711.60018260f, 691.28626547f, 748.62642455f, 746.51683910f, 696.58499822f, 1205.63498643f,
-    1174.93313939f, 1181.28617183f, 787.13958581f, 776.66615025f, 696.02952235f, 685.68599403f, 678.95176233f, 605.40200390f,
-    956.91122821f, 976.48029007f, 875.15282685f,
-};
+extern const tss_task_ops_t *tss_get_task_ops();
 
-/**
- * @brief      Initialize the anomaly detection algorithm with the specified model.
- * @param[in]  model_buffer             - The model buffer for initialization, NULL means reset the model.
- * @retval     TSS_SUCCESS              - Initialization succeed.
- */
-tss_status tss_ad_init(const float model_buffer[]);
-
-/**
- * @brief      Learn new model from the normal data.
- * @param[in]  data_input               - The data input for the learning.
- * @retval     TSS_SUCCESS              - Learning succeed
- * @retval     TSS_LEARNING_NOT_ENOUGH  - More data needed for the learning.
- */
-tss_status tss_ad_learn(const float data_input[]);
-
-/**
- * @brief      Export the model to the specified buffer.
- * @param[out] model_buffer             - The exported model buffer.
- * @retval     TSS_SUCCESS              - Export succeed.
- * @retval     TSS_PREDICT_NOT_ENABLED  - Model not ready for export.
- */
-tss_status tss_ad_export(float model_buffer[]);
-
-/**
- * @brief      Predict the normal probability of the specified data.
- * @param[in]  data_input               - The data input for the prediction.
- * @param[out] probability              - The predicted probability output.
- * @retval     TSS_SUCCESS              - Prediction succeed.
- * @retval     TSS_PREDICT_NOT_ENABLED  - Model not ready for prediction.
- */
-tss_status tss_ad_predict(const float data_input[], float *probability);
-
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif
 

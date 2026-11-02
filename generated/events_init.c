@@ -117,7 +117,7 @@ static void msgbox_event_cb (lv_event_t *e)
 
 
 }
-const char *btns_txt[] = {"Yes", "No",""};
+
 static void Model_btn_default_event_handler(lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -126,8 +126,8 @@ static void Model_btn_default_event_handler(lv_event_t *e)
 	case LV_EVENT_CLICKED:
 	{
 
-
-		lv_obj_t *mbox1 = lv_msgbox_create(ui->Model_Training, (const char *)"Warning", (const char *)"Reset to default Model ?",btns_txt,1);
+		static const char *btns_txt[] = {"Yes", "No",""};
+		lv_obj_t *mbox1 = lv_msgbox_create(ui->Model_Training, "Warning", "Reset to default Model ?",btns_txt,1);
 
 		lv_obj_align(mbox1,  LV_ALIGN_CENTER, 0, 0);
 
